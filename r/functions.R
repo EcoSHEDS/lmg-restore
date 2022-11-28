@@ -120,8 +120,8 @@ transform_variables <- function(df, categories) {
   cfg
 }
 
-load_dataset <- function (theme, col_types) {
-  read_csv(file.path(config::get("data_dir"), "sciencebase", theme$id, theme$config$data_file), col_types = col_types)
+load_dataset <- function (theme, ...) {
+  read_csv(file.path(config::get("data_dir"), "sciencebase", theme$id, theme$config$data_file), ...)
 }
 
 create_layer <- function (df, coords = c("dec_long_va", "dec_lat_va")) {
