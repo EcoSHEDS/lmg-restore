@@ -20,7 +20,7 @@ export function downloadDataset (filtered, theme) {
 
   const d = new Date()
 
-  let dataFields = Object.keys(data[0])
+  const dataFields = Object.keys(data[0])
   dataFields.splice(dataFields.findIndex(d => d === '$index'), 1) // remove '$index' column
 
   const dataCsv = json2csv.parse(data, { fields: dataFields })
@@ -39,7 +39,7 @@ export function downloadDataset (filtered, theme) {
   variables = [...variables, ...theme.variables]
   const variableLines = variables.map(d => `# ${d.id}: ${d.label}${d.units ? ' (' + d.units + ')' : ''}`)
 
-  let headerLines = [
+  const headerLines = [
     '# USGS LMGWSC Data Visualization Tool',
     `# Downloaded At: ${timeFormat('%m/%d/%Y %H:%M:%S')(d)}`,
     '#',

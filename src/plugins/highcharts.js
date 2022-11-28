@@ -21,11 +21,10 @@ Highcharts.setOptions({
   H.Axis.prototype.log2lin = function (num) {
     const isNegative = num < 0
     let adjustedNum = Math.abs(num)
-    let result
     if (adjustedNum < 10) {
       adjustedNum += (10 - adjustedNum) / 10
     }
-    result = Math.log(adjustedNum) / Math.LN10
+    const result = Math.log(adjustedNum) / Math.LN10
     return isNegative ? -result : result
   }
   H.Axis.prototype.lin2log = function (num) {
