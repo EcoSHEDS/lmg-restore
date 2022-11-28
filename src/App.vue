@@ -693,6 +693,7 @@ import Huc12Primary from '@/components/themes/Huc12Primary'
 import Huc12Cov from '@/components/themes/Huc12Cov'
 import Huc12Qquantile from '@/components/themes/Huc12Qquantile'
 import Huc12Solar from '@/components/themes/Huc12Solar'
+import Huc12Hydroalt from '@/components/themes/Huc12Hydroalt'
 
 import { getValueById, getFilteredCount, getTotalCount } from '@/lib/crossfilter'
 import themes from '@/assets/themes'
@@ -723,7 +724,8 @@ export default {
     Huc12Primary,
     Huc12Cov,
     Huc12Qquantile,
-    Huc12Solar
+    Huc12Solar,
+    Huc12Hydroalt
   },
   data: () => ({
     debug: process.env.NODE_ENV === 'development',
@@ -860,7 +862,7 @@ export default {
         console.log(`theme: ${themes[iTheme].id}`)
         await this.selectTheme(themes[iTheme])
           .then(() => {
-            return new Promise(async (resolve) => {
+            return new Promise(async (resolve) => { // eslint-disable-line
               const variables = this.variables.filter(d => d.filter)
               await loadVariable(variables[0])
               for (let i = 1; i < variables.length; i++) {

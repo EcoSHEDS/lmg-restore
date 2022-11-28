@@ -30,7 +30,7 @@
 
       <ice-feature-box v-if="!error && !loading">
         <template v-slot:title><span v-if="theme.citations.length > 1">Citations</span><span v-else>Citation</span></template>
-        <v-card-text class="pb-1">
+        <v-card-text class="pb-1 black--text">
           <p v-for="citation in theme.citations" :key="citation.text">
             {{ citation.text }} <a :href="citation.url" target="_blank">{{ citation.url }}</a>.
           </p>
