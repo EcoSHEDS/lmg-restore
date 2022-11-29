@@ -121,7 +121,6 @@ export default {
       } else if (this.themeType === 'huc12') {
         this.tip.html(d => `
           <strong>HUC12: ${d.properties.huc12}</strong><br>
-          COMID: ${d.properties.comid}<br><br>
           ${this.variable.label} = ${typeof this.getValue(d) === 'object' ? this.valueFormatter(this.getValue(d).mean) + ` ${this.variable.units || ''}` : 'N/A'}
         `)
       }

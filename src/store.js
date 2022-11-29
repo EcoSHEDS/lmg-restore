@@ -113,6 +113,10 @@ export default new Vuex.Store({
                   x.signif = d.signif === 'TRUE'
                 }
 
+                if (theme.dimensions.exceedance) {
+                  x.exceedance_probs = d.exceedance_probs.toString()
+                }
+
                 numVariables.forEach(v => {
                   x[v] = d[v] === '' ? null : +d[v]
                 })

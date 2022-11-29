@@ -180,7 +180,8 @@ export_theme <- function (theme, variables, dataset, layer) {
     ),
     dimensions = list(
       decade = theme$config$dims_decade,
-      signif = theme$config$dims_signif
+      signif = theme$config$dims_signif,
+      exceedance = theme$config$dims_exceedance
     ),
     variables = variables$config
   ) %>% 

@@ -55,20 +55,17 @@ export function setVariable (variable) {
       byFeature.group = byFeature.dim.group().reduce(
         (p, v) => {
           if (v[variable.id] === null) return p
-          p.count += 1
-          p.mean = v[variable.id]
+          p.counts[v[variable.id]] = p.counts[v[variable.id]] ? p.counts[v[variable.id]] + 1 : 1
           return p
         },
         (p, v) => {
           if (v[variable.id] === null) return p
-          p.count -= 1
-          p.mean = v[variable.id]
+          p.counts[v[variable.id]] = p.counts[v[variable.id]] ? p.counts[v[variable.id]] - 1 : -1
           return p
         },
         () => {
           return {
-            count: 0,
-            mean: null
+            counts: {}
           }
         }
       )

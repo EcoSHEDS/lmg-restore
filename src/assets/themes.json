@@ -106,6 +106,18 @@
         "title": "HUC12 Basins > Basin Characteristics"
       },
       {
+        "id": "huc12-hydroalt",
+        "name": "Hydrologic Alteration",
+        "description": "Modeled daily streamflow data for 9,201 12-digit hydrologic unit code (HUC12) pour points draining to the Gulf of Mexico were used to calculate hydrologic alteration using three methods. The first method is streamflow trend analysis using the Quantile-Kendall methodology developed by Robert M. Hirsch. The second method is calculating hydro change which is a modified method of calculating ecosurplus and ecodeficit. For this project ecosurplus and ecodeficit have been combined to assess overall hydrologic regime change. The third method is the confidence interval hypothesis test developed by Charles N. Kroll. The first two methods are a means of quantifying hydrologic alteration while the third is a hypothesis test to simply determine if statistically significant alteration has occurred. All three methods are employed to determine which is the best at determining alteration of the hydrologic regime in the Gulf Coast Ecosystem Restoration Council (RESTORE) study area. Statistical analysis was done in RStudio. The HUC12 pour points are the geographic data used to view the results spatially.",
+        "citations": [
+          {
+            "text": "Crowley-Ornelas, E.R., and Roland, V.L., 2021, Assessment of hydrologic alteration at 12-digit hydrologic unit code (HUC12) pour points in the southeastern United States, 1950 - 2009: U.S. Geological Survey data release.",
+            "url": "https://doi.org/10.5066/P93TLFWJ"
+          }
+        ],
+        "title": "HUC12 Basins > Hydrologic Alteration"
+      },
+      {
         "id": "huc12-qquantile",
         "name": "Streamflow Quantiles",
         "description": "Estimated streamflow quantiles for 9,203 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. The estimated quantiles range from 0.03% to 99.97% and were estimated using a multi-output neural network that was trained using streamflow data at sites with records containing only non-zero streamflow values. Quantiles were estimated at decadal intervals from the 1950s (1950-1959) to the 2000s (2000-2009). See the dataset citation for more information about the methodology used to generate this dataset.",
@@ -128,18 +140,6 @@
           }
         ],
         "title": "HUC12 Basins > Solar Radiation"
-      },
-      {
-        "id": "huc12-hydroalt",
-        "name": "Hydrologic Alteration",
-        "description": "Modeled daily streamflow data for 9,201 12-digit hydrologic unit code (HUC12) pour points draining to the Gulf of Mexico were used to calculate hydrologic alteration using three methods. The first method is streamflow trend analysis using the Quantile-Kendall methodology developed by Robert M. Hirsch. The second method is calculating hydro change which is a modified method of calculating ecosurplus and ecodeficit. For this project ecosurplus and ecodeficit have been combined to assess overall hydrologic regime change. The third method is the confidence interval hypothesis test developed by Charles N. Kroll. The first two methods are a means of quantifying hydrologic alteration while the third is a hypothesis test to simply determine if statistically significant alteration has occurred. All three methods are employed to determine which is the best at determining alteration of the hydrologic regime in the Gulf Coast Ecosystem Restoration Council (RESTORE) study area. Statistical analysis was done in RStudio. The HUC12 pour points are the geographic data used to view the results spatially.",
-        "citations": [
-          {
-            "text": "Crowley-Ornelas, E.R., and Roland, V.L., 2021, Assessment of hydrologic alteration at 12-digit hydrologic unit code (HUC12) pour points in the southeastern United States, 1950 - 2009: U.S. Geological Survey data release.",
-            "url": "https://doi.org/10.5066/P93TLFWJ"
-          }
-        ],
-        "title": "HUC12 Basins > Hydrologic Alteration"
       }
     ]
   }

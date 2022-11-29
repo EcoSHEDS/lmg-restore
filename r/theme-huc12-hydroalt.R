@@ -1,6 +1,7 @@
 # theme: huc12-hydroalt
 
 library(tidyverse)
+library(janitor)
 library(sf)
 
 source("functions.R")
@@ -19,10 +20,14 @@ df_dataset <- load_dataset(theme, col_types = cols(
 ), na = "NA") %>% 
   rename(id = huc12, exceedance_probs = exceedence_probs) %>%
   arrange(id, exceedance_probs) %>% 
-  distinct()
+  distinct() %>% 
+  mutate(
+    ecochange = coalesce(ecochange, "N/A"),
+    exceedance_probs = as.character(exceedance_probs)
+  )
 
 out_dataset <- df_dataset %>% 
-  select(id, variables$df$id)
+  select(id, exceedance_probs, variables$df$id)
 
 dataset <- list(
   df = df_dataset,
@@ -42,7 +47,13 @@ layer_sf <- st_read(
   file.path(config::get("data_dir"), "sciencebase", theme$id, "hydrologic_alteration_pourpoints", "hydrologic_alteration_pourpoints.shp")
 ) %>%
   st_transform("EPSG:4326") %>% 
-  rename(id = HUC_12)
+  rename(id = HUC_12) %>% 
+  mutate(
+    huc12 = id,
+    dec_long_va = map_dbl(geometry, ~ st_coordinates(.)[1]),
+    dec_lat_va = map_dbl(geometry, ~ st_coordinates(.)[2])
+  ) %>%
+  select(id, huc12, dec_lat_va, dec_long_va)
 stopifnot(all(!duplicated(layer_sf$id)))
 
 layer <- list(
@@ -53,6 +64,9 @@ layer <- list(
 layer_sf %>% 
   ggplot() +
   geom_sf()
+
+df_dataset <- df_dataset %>% 
+  filter(id %in% layer_sf$id)
 
 stopifnot(all(layer_sf$id %in% df_dataset$id))
 stopifnot(all(df_dataset$id %in% layer_sf$id))

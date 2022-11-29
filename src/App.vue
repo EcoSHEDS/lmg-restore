@@ -51,7 +51,7 @@
           @click="selectFeature">
         </IceMapLayer>
       </IceMap>
-      <v-container fluid fill-height class="align-stretch py-0">
+      <v-container fluid fill-height class="align-stretch py-0 mt-4">
         <v-row>
           <v-col>
             <v-card width="500">
@@ -83,6 +83,7 @@
                         <span v-else-if="error.theme">Failed to load dataset</span>
                         <span v-else>None</span>
                       </div>
+                      <exceedance-dimension v-if="theme.dimensions.exceedance" class="mt-4"></exceedance-dimension>
                       <decade-dimension v-if="theme.dimensions.decade" class="mt-4"></decade-dimension>
                       <signif-dimension v-if="theme.dimensions.signif"></signif-dimension>
                       <div class="subheading mt-4" v-if="theme && theme.id === 'gage-primary' || theme.id === 'gage-qtrend'">
@@ -680,6 +681,7 @@ import Disclaimer from '@/components/Disclaimer'
 
 import DecadeDimension from '@/components/dimensions/DecadeDimension'
 import SignifDimension from '@/components/dimensions/SignifDimension'
+import ExceedanceDimension from '@/components/dimensions/ExceedanceDimension'
 
 import TrendVariable from '@/components/TrendVariable'
 import UserGuide from '@/components/UserGuide'
@@ -712,8 +714,11 @@ export default {
     IceFilter,
     IceLegendBox,
     Disclaimer,
+
     DecadeDimension,
     SignifDimension,
+    ExceedanceDimension,
+
     TrendVariable,
     UserGuide,
     GagePrimary,
@@ -913,7 +918,14 @@ export default {
       }
     },
     getValue (feature) {
-      return getValueById(feature.id)
+      const value = getValueById(feature.id)
+      if (this.variable.type === 'cat') {
+        const values = Object.entries(value.counts).filter(d => d[1] > 0)
+        if (values.length > 0) {
+          value.mean = values[0][0]
+        }
+      }
+      return value
     },
     getFill (feature) {
       const value = this.getValue(feature)

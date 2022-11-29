@@ -7,10 +7,6 @@
         <v-list-item-content class="align-end">{{ properties.huc12 }}</v-list-item-content>
       </v-list-item>
       <v-list-item>
-        <v-list-item-content class="align-start">COMID</v-list-item-content>
-        <v-list-item-content class="align-end">{{ properties.comid }}</v-list-item-content>
-      </v-list-item>
-      <v-list-item>
         <v-list-item-content class="align-start">Latitude</v-list-item-content>
         <v-list-item-content class="align-end">{{ properties.dec_lat_va  }}</v-list-item-content>
       </v-list-item>
