@@ -56,16 +56,19 @@ export function setVariable (variable) {
         (p, v) => {
           if (v[variable.id] === null) return p
           p.counts[v[variable.id]] = p.counts[v[variable.id]] ? p.counts[v[variable.id]] + 1 : 1
+          p.count += 1
           return p
         },
         (p, v) => {
           if (v[variable.id] === null) return p
           p.counts[v[variable.id]] = p.counts[v[variable.id]] ? p.counts[v[variable.id]] - 1 : -1
+          p.count -= 1
           return p
         },
         () => {
           return {
-            counts: {}
+            counts: {},
+            count: 0
           }
         }
       )

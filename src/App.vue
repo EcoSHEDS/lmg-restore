@@ -919,7 +919,7 @@ export default {
     },
     getValue (feature) {
       const value = getValueById(feature.id)
-      if (this.variable.type === 'cat') {
+      if (this.variable && this.variable.type === 'cat') {
         const values = Object.entries(value.counts).filter(d => d[1] > 0)
         if (values.length > 0) {
           value.mean = values[0][0]
