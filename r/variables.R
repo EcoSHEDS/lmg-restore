@@ -8,12 +8,12 @@ library(sf)
 
 config <- config::get()
 
-themes <- list.dirs(path = config$sciencebase$dir, recursive = FALSE) %>% basename()
+themes <- list.dirs(path = config$data_dir, recursive = FALSE) %>% basename()
 
 
 # gage-cov ----------------------------------------------------------------
 
-xml_gage_cov <- read_xml(file.path(config$sciencebase$dir, "gage-cov", "Summary of basin characteristics for NHD v.2 catchments in the southeastern U.S., 1950-2010 at USGS streamflow-gaging stations.xml"))
+xml_gage_cov <- read_xml(file.path(config$data_dir, "gage-cov", "Summary of basin characteristics for NHD v.2 catchments in the southeastern U.S., 1950-2010 at USGS streamflow-gaging stations.xml"))
 xml_gage_cov_attrs <- xml_find_all(xml_gage_cov, './eainfo/detailed/attr')
 
 vars_gage_cov <- tibble(
@@ -37,7 +37,7 @@ vars_gage_cov <- tibble(
     theme = "gage-cov"
   )
 
-df_gage_cov <- read_csv(file.path(config$sciencebase$dir, "gage-cov", "all_gage_covariates.csv"), col_types = cols(
+df_gage_cov <- read_csv(file.path(config$data_dir, "gage-cov", "all_gage_covariates.csv"), col_types = cols(
   .default = col_double(),
   site_no = col_character(),
   huc12 = col_character(),
@@ -61,7 +61,7 @@ df_gage_cov
 
 # gage-qstat -------------------------------------------------------------
 
-xml_gage_qstat <- read_xml(file.path(config$sciencebase$dir, "gage-qstat", "all_gage_flow_stats.xml"))
+xml_gage_qstat <- read_xml(file.path(config$data_dir, "gage-qstat", "all_gage_flow_stats.xml"))
 xml_gage_qstat_attrs <- xml_find_all(xml_gage_qstat, './eainfo/detailed[1]/attr')
 
 vars_gage_qstat <- tibble(
@@ -85,7 +85,7 @@ vars_gage_qstat <- tibble(
     theme = "gage-qstat"
   )
 
-df_gage_qstat <- read_csv(file.path(config$sciencebase$dir, "gage-qstat", "all_gage_flow_stats.csv"), col_types = cols(
+df_gage_qstat <- read_csv(file.path(config$data_dir, "gage-qstat", "all_gage_flow_stats.csv"), col_types = cols(
   .default = col_double(),
   site_no = col_character(),
   huc12 = col_character()
@@ -99,7 +99,7 @@ df_gage_qstat <- read_csv(file.path(config$sciencebase$dir, "gage-qstat", "all_g
 
 # gage-qtrend -------------------------------------------------------------
 
-xml_gage_qtrend <- read_xml(file.path(config$sciencebase$dir, "gage-qtrend", "Metadata for Trend analysis for sites used in RESTORE Streamflow alterations assessments.xml"))
+xml_gage_qtrend <- read_xml(file.path(config$data_dir, "gage-qtrend", "Metadata for Trend analysis for sites used in RESTORE Streamflow alterations assessments.xml"))
 xml_find_all(xml_gage_qtrend, './eainfo/detailed')
 xml_gage_qtrend_attrs_mk <- xml_find_all(xml_gage_qtrend, './eainfo/detailed[1]/attr')
 xml_gage_qtrend_attrs_qk <- xml_find_all(xml_gage_qtrend, './eainfo/detailed[2]/attr')
@@ -145,7 +145,7 @@ vars_gage_qtrend <- tibble(
 
 # gage-qts ----------------------------------------------------------
 
-xml_gage_qts <- read_xml(file.path(config$sciencebase$dir, "gage-qts", "metadata_copula.xml"))
+xml_gage_qts <- read_xml(file.path(config$data_dir, "gage-qts", "metadata_copula.xml"))
 xml_gage_qts_attrs <- xml_find_all(xml_gage_qts, './eainfo/detailed[3]/attr')
 
 vars_gage_qts <- tibble(
@@ -169,7 +169,7 @@ vars_gage_qts <- tibble(
     theme = "gage-qts"
   )
 
-df_gage_qts <- read_csv(file.path(config$sciencebase$dir, "gage-qts", "dv_output.csv"), col_types = cols(
+df_gage_qts <- read_csv(file.path(config$data_dir, "gage-qts", "dv_output.csv"), col_types = cols(
   .default = col_double(),
   date = col_date(format = ""),
   target = col_character(),
@@ -189,7 +189,7 @@ df_gage_qts %>%
 
 # gage-solar --------------------------------------------------------------
 
-xml_gage_solar <- read_xml(file.path(config$sciencebase$dir, "gage-solar", "Solar radiation for NHD, v.2 catchments in the southeastern U.S., 1950-2010 at USGS streamflow-gaging stations.xml"))
+xml_gage_solar <- read_xml(file.path(config$data_dir, "gage-solar", "Solar radiation for NHD, v.2 catchments in the southeastern U.S., 1950-2010 at USGS streamflow-gaging stations.xml"))
 xml_find_all(xml_gage_solar, './eainfo/detailed')
 xml_gage_solar_attrs <- xml_find_all(xml_gage_solar, './eainfo/detailed[1]/attr')
 
@@ -214,7 +214,7 @@ vars_gage_solar <- tibble(
     theme = "gage-solar"
   )
 
-df_gage_solar <- read_csv(file.path(config$sciencebase$dir, "gage-solar", "all_gage_solar.csv"), col_types = cols(
+df_gage_solar <- read_csv(file.path(config$data_dir, "gage-solar", "all_gage_solar.csv"), col_types = cols(
   .default = col_double(),
   site_no = col_character(),
   huc12 = col_character()
@@ -238,7 +238,7 @@ df_gage_solar %>%
 
 # huc12-cov ----------------------------------------------------------------
 
-xml_huc12_cov <- read_xml(file.path(config$sciencebase$dir, "huc12-cov", "Summary of basin characteristics for NHD, v.2 catchments in the southeastern U.S., 1950-2010 at 12-digit hydrologic unit code (HUC12) pour points.xml"))
+xml_huc12_cov <- read_xml(file.path(config$data_dir, "huc12-cov", "Summary of basin characteristics for NHD, v.2 catchments in the southeastern U.S., 1950-2010 at 12-digit hydrologic unit code (HUC12) pour points.xml"))
 xml_find_all(xml_huc12_cov, './eainfo/detailed')
 xml_huc12_cov_attrs <- xml_find_all(xml_huc12_cov, './eainfo/detailed/attr')
 
@@ -263,7 +263,7 @@ vars_huc12_cov <- tibble(
     theme = "huc12-cov"
   )
 
-df_huc12_cov <- read_csv(file.path(config$sciencebase$dir, "huc12-cov", "all_huc12_covariates.csv"), col_types = cols(
+df_huc12_cov <- read_csv(file.path(config$data_dir, "huc12-cov", "all_huc12_covariates.csv"), col_types = cols(
   .default = col_double(),
   huc12 = col_character(),
   aquifers = col_character(),
@@ -287,7 +287,7 @@ df_huc12_cov
 
 # huc12-qquantile ---------------------------------------------------------
 
-xml_huc12_qquantile <- read_xml(file.path(config$sciencebase$dir, "huc12-qquantile", "meta_data_huc12_fdc_final.xml"))
+xml_huc12_qquantile <- read_xml(file.path(config$data_dir, "huc12-qquantile", "meta_data_huc12_fdc_final.xml"))
 xml_find_all(xml_huc12_qquantile, './eainfo/detailed')
 xml_huc12_qquantile_attrs <- xml_find_all(xml_huc12_qquantile, './eainfo/detailed[1]/attr')
 
@@ -312,7 +312,7 @@ vars_huc12_qquantile <- tibble(
     theme = "huc12-qquantile"
   )
 
-df_huc12_qquantile <- read_csv(file.path(config$sciencebase$dir, "huc12-qquantile", "fdc_predictions_huc12s.csv"), col_types = cols(
+df_huc12_qquantile <- read_csv(file.path(config$data_dir, "huc12-qquantile", "fdc_predictions_huc12s.csv"), col_types = cols(
   comid = col_double(),
   huc12 = col_character(),
   decade = col_double(),
@@ -341,7 +341,7 @@ setdiff(sort(names(df_huc12_qquantile)), sort(vars_huc12_qquantile$variable))
 
 # huc12-solar --------------------------------------------------------------
 
-xml_huc12_solar <- read_xml(file.path(config$sciencebase$dir, "huc12-solar", "Solar radiation for HND, v.2 catchments in the southeastern U.S., 1950-2010 at 12-digit hydrologic unit code (HUC12) pour points.xml"))
+xml_huc12_solar <- read_xml(file.path(config$data_dir, "huc12-solar", "Solar radiation for HND, v.2 catchments in the southeastern U.S., 1950-2010 at 12-digit hydrologic unit code (HUC12) pour points.xml"))
 xml_find_all(xml_huc12_solar, './eainfo/detailed')
 xml_huc12_solar_attrs <- xml_find_all(xml_huc12_solar, './eainfo/detailed[1]/attr')
 
@@ -366,7 +366,7 @@ vars_huc12_solar <- tibble(
     theme = "huc12-solar"
   )
 
-df_huc12_solar <- read_csv(file.path(config$sciencebase$dir, "huc12-solar", "all_huc12_solar.csv"), col_types = cols(
+df_huc12_solar <- read_csv(file.path(config$data_dir, "huc12-solar", "all_huc12_solar.csv"), col_types = cols(
   .default = col_double(),
   huc12 = col_character()
 )) %>% 

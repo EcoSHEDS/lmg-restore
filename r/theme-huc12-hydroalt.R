@@ -22,12 +22,23 @@ df_dataset <- load_dataset(theme, col_types = cols(
   arrange(id, exceedance_probs) %>% 
   distinct() %>% 
   mutate(
-    ecochange = coalesce(ecochange, "N/A"),
+    # ecochange = coalesce(ecochange, "N/A"),
     exceedance_probs = as.character(exceedance_probs)
   )
 
+df_pval <- read_csv(file.path(config::get("data_dir"), theme$id, "confidence_interval_test.csv"))
+
+stopifnot(all(df_pval$huc12 %in% unique(df_dataset$id)))
+
+df_dataset <- df_dataset %>% 
+  left_join(df_pval, by = c("id" = "huc12"))
+
 out_dataset <- df_dataset %>% 
-  select(id, exceedance_probs, variables$df$id)
+  select(id, exceedance_probs, variables$df$id) %>% 
+  mutate(
+    ecochange = coalesce(ecochange, "N/A"),
+    signif = p_value <= 0.05
+  )
 
 dataset <- list(
   df = df_dataset,
@@ -44,7 +55,7 @@ stopifnot(
 # layer -------------------------------------------------------------------
 
 layer_sf <- st_read(
-  file.path(config::get("data_dir"), "sciencebase", theme$id, "hydrologic_alteration_pourpoints", "hydrologic_alteration_pourpoints.shp")
+  file.path(config::get("data_dir"), theme$id, "hydrologic_alteration_pourpoints", "hydrologic_alteration_pourpoints.shp")
 ) %>%
   st_transform("EPSG:4326") %>% 
   rename(id = HUC_12) %>% 
@@ -53,7 +64,8 @@ layer_sf <- st_read(
     dec_long_va = map_dbl(geometry, ~ st_coordinates(.)[1]),
     dec_lat_va = map_dbl(geometry, ~ st_coordinates(.)[2])
   ) %>%
-  select(id, huc12, dec_lat_va, dec_long_va)
+  left_join(df_pval, by = "huc12") %>% 
+  select(id, huc12, dec_lat_va, dec_long_va, p_value)
 stopifnot(all(!duplicated(layer_sf$id)))
 
 layer <- list(

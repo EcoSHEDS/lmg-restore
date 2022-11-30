@@ -29,6 +29,8 @@ export default {
   mounted () {
     const xf = getCrossfilter()
     this.dim = xf.dimension(d => d.signif)
+    window.xf = xf
+    window.dim = this.dim
     evt.$on('theme:set', this.update)
   },
   beforeDestroy () {
@@ -37,7 +39,12 @@ export default {
   },
   methods: {
     update () {
-      this.dim.filterExact(this.value)
+      console.log('update', this.value)
+      if (this.value) {
+        this.dim.filterExact(this.value)
+      } else {
+        this.dim.filterAll()
+      }
       evt.$emit('map:render')
       evt.$emit('xf:filter')
       evt.$emit('filter:render')

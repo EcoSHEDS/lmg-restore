@@ -14,7 +14,7 @@ variables <- load_variables(theme)
 # layer -------------------------------------------------------------------
 
 df_layer <- readxl::read_xlsx(
-  file.path(config::get("data_dir"), "sciencebase", theme$id, "Longitude and latitude of sites used in RESTORE Streamflow alteration assessments.xlsx"),
+  file.path(config::get("data_dir"), theme$id, "Longitude and latitude of sites used in RESTORE Streamflow alteration assessments.xlsx"),
   sheet = 1
 ) %>% 
   mutate(
@@ -38,7 +38,7 @@ read_qk <- function(decade, season) {
   } else {
     filename <- glue("{season}_QK_{decade}_Results.xls")
   }
-  filepath <- file.path(config::get("data_dir"), "sciencebase", theme$id, "_versions", "v1.0", "Trend analysis results", "Quantile-Kendall results", decade, filename)
+  filepath <- file.path(config::get("data_dir"), theme$id, "_versions", "v1.0", "Trend analysis results", "Quantile-Kendall results", decade, filename)
   
   sheets <- readxl::excel_sheets(filepath)
   
@@ -139,7 +139,7 @@ read_mk <- function(decade, season) {
   cat(glue("read_mk({decade},{season})"), "\n")
   
   filename <- glue("{season}Ave_{decade}.xlsx")
-  filepath <- file.path(config::get("data_dir"), "sciencebase", theme$id, "Trend analysis results_v1.1", glue("Result Output {decade}"), filename)
+  filepath <- file.path(config::get("data_dir"), theme$id, "Trend analysis results_v1.1", glue("Result Output {decade}"), filename)
   readxl::read_xlsx(filepath, sheet = 1, na = "NaN", skip = 1, col_names = c("Row", "Site", "Tau", "Tau.p", "SensSlope", "Z", "Z.p")) %>% 
     select(-Row)
 }

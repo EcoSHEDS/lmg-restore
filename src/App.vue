@@ -64,9 +64,9 @@
                 <v-tab ripple>
                   Dataset
                 </v-tab>
-                <v-tab ripple :disabled="!theme">
+                <!-- <v-tab ripple :disabled="!theme">
                   Map Variable
-                </v-tab>
+                </v-tab> -->
                 <v-tab ripple :disabled="!theme">
                   Crossfilters
                 </v-tab>
@@ -90,6 +90,38 @@
                         <v-icon small>mdi-information</v-icon> For trend test results, the decade slider sets the
                         starting point of the analysis period, which always ends in 2015 (e.g., if 1970s is selected, then trend results
                         are based on 1970-2015).
+                      </div>
+
+                      <v-divider class="my-4"></v-divider>
+
+                      <div class="pt-8" v-if="theme.id === 'gage-qtrend'">
+                        <trend-variable @update="setVariableById"></trend-variable>
+                      </div>
+                      <div v-else>
+                        <div class="font-weight-bold text-subtitle-1 black--text mb-4">Color Variable</div>
+                        <v-autocomplete
+                          label="Select color variable..."
+                          :items="mapVariables"
+                          v-model="variable"
+                          return-object
+                          dense
+                          outlined
+                          item-value="id"
+                          item-text="label"
+                          :menu-props="{ closeOnClick: false, closeOnContentClick: false, openOnClick: false, maxHeight: 400 }"
+                          class="mt-2"
+                          hide-details
+                        >
+                          <template v-slot:item="{ item }">
+                            <v-list-item-content class="pl-3 body-2" v-html="item.label"></v-list-item-content>
+                            <v-tooltip right max-width="600">
+                              <template v-slot:activator="{ on }">
+                                <v-icon v-on="on" small color="grey lighten-1">mdi-information</v-icon>
+                              </template>
+                              {{ item.description }}
+                            </v-tooltip>
+                          </template>
+                        </v-autocomplete>
                       </div>
                     </v-card-text>
                     <v-card-text v-else-if="error.theme">
@@ -116,37 +148,11 @@
                     </v-card-actions>
                   </v-card>
                 </v-tab-item>
-                <v-tab-item transition="false" reverse-transition="false">
+                <!-- <v-tab-item transition="false" reverse-transition="false">
                   <v-card v-show="!collapse.tabs" v-if="theme">
-                    <v-card-text class="pt-8" v-if="theme.id === 'gage-qtrend'">
-                      <trend-variable @update="setVariableById"></trend-variable>
-                    </v-card-text>
-                    <v-card-text v-else class="pb-2">
-                      <v-autocomplete
-                        label="Select variable..."
-                        :items="mapVariables"
-                        v-model="variable"
-                        return-object
-                        dense
-                        outlined
-                        item-value="id"
-                        item-text="label"
-                        :menu-props="{ closeOnClick: false, closeOnContentClick: false, openOnClick: false, maxHeight: 400 }"
-                        class="mb-4 mt-2"
-                        hide-details>
-                        <template v-slot:item="{ item }">
-                          <v-list-item-content class="pl-3 body-2" v-html="item.label"></v-list-item-content>
-                          <v-tooltip right max-width="600">
-                            <template v-slot:activator="{ on }">
-                              <v-icon v-on="on" small color="grey lighten-1">mdi-information</v-icon>
-                            </template>
-                            {{ item.description }}
-                          </v-tooltip>
-                        </template>
-                      </v-autocomplete>
-                    </v-card-text>
+
                   </v-card>
-                </v-tab-item>
+                </v-tab-item> -->
                 <v-tab-item transition="false" reverse-transition="false">
                   <v-card v-show="!collapse.tabs" v-if="theme">
                     <v-card-text class="pb-2">

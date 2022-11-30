@@ -156,9 +156,10 @@ export default {
       const dim = xf.dimension(d => d[this.variable.id])
       const group = dim.group().reduceCount()
       const count = this.variable.scale.domain.length
-      window.xf = xf
-      window.group = group
-      console.log(count)
+      // window.xf = xf
+      // window.dim = dim
+      // window.group = group
+      // console.log(count)
       const gap = 5
       const barHeight = 20
       const height = margins.top + margins.bottom + barHeight * count + gap * (count + 1)

@@ -51,7 +51,7 @@ parse_xml_attrs <- function (xml_attrs) {
 extract_meta_variables <- function(theme) {
   # to find meta_file_index
   # > xml2::xml_find_all(xml2::read_xml(meta_xml_path), './eainfo/detailed')
-  meta_xml_path <- file.path(config::get("data_dir"), "sciencebase", theme$id, theme$config$meta_file)
+  meta_xml_path <- file.path(config::get("data_dir"), theme$id, theme$config$meta_file)
   meta_xml <- xml2::read_xml(meta_xml_path)
   map(theme$config$meta_file_index, function (index) {
     meta_xml_attrs <- xml2::xml_find_all(meta_xml, glue::glue('./eainfo/detailed[{index}]/attr'))
@@ -121,7 +121,7 @@ transform_variables <- function(df, categories) {
 }
 
 load_dataset <- function (theme, ...) {
-  read_csv(file.path(config::get("data_dir"), "sciencebase", theme$id, theme$config$data_file), ...)
+  read_csv(file.path(config::get("data_dir"), theme$id, theme$config$data_file), ...)
 }
 
 create_layer <- function (df, coords = c("dec_long_va", "dec_lat_va")) {

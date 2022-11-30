@@ -119,10 +119,16 @@ export default {
           ${this.variable.label}: ${typeof this.getValue(d) === 'object' ? this.valueFormatter(this.getValue(d).mean) + ` ${this.variable.units || ''}` : 'N/A'}
         `)
       } else if (this.themeType === 'huc12') {
-        this.tip.html(d => `
-          <strong>HUC12: ${d.properties.huc12}</strong><br>
-          ${this.variable.label} = ${typeof this.getValue(d) === 'object' ? this.valueFormatter(this.getValue(d).mean) + ` ${this.variable.units || ''}` : 'N/A'}
-        `)
+        this.tip.html(d => {
+          let x = `
+            <strong>HUC12: ${d.properties.huc12}</strong><br>
+            ${this.variable.label} = ${typeof this.getValue(d) === 'object' ? this.valueFormatter(this.getValue(d).mean) + ` ${this.variable.units || ''}` : 'N/A'}
+          `
+          if (isFinite(d.properties.p_value)) {
+            x += `<br>Alteration p-Value = ${d.properties.p_value && d.properties.p_value < 0.0001 ? '< 0.0001' : d.properties.p_value.toFixed(4)}`
+          }
+          return x
+        })
       }
     },
     loadLayer (layer) {
