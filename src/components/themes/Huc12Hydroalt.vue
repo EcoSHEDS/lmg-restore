@@ -52,7 +52,7 @@
 
 <script>
 import highcharts from 'highcharts'
-
+import { ascending } from 'd3'
 import themeSelect from '@/mixins/themeSelect'
 
 const categories = {
@@ -250,10 +250,17 @@ export default {
   methods: {
     updateCharts () {
       this.clearCharts()
+      const values = this.values.map(d => {
+        return {
+          ...d,
+          exceedance_probs: +d.exceedance_probs
+        }
+      })
+      values.sort((a, b) => ascending(a.exceedance_probs, b.exceedance_probs))
       this.charts.flow.series = [
         {
           name: 'Pre-alteration',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.pre]
           }),
           type: 'line',
@@ -267,7 +274,7 @@ export default {
           }
         }, {
           name: 'Post-alteration',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.post]
           }),
           type: 'line',
@@ -285,7 +292,7 @@ export default {
       this.charts.vol.series = [
         {
           name: 'Pre-alteration',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.pre_int]
           }),
           type: 'line',
@@ -299,7 +306,7 @@ export default {
           }
         }, {
           name: 'Post-alteration',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.post_int]
           }),
           type: 'line',
@@ -317,7 +324,7 @@ export default {
       this.charts.ecochange.series = [
         {
           name: 'Ecochange',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [
               d.exceedance_probs,
               d.ecochange !== 'N/A'
@@ -340,7 +347,7 @@ export default {
       this.charts.eco_val.series = [
         {
           name: 'Ecochange Value',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.eco_val]
           }),
           type: 'line',
@@ -358,7 +365,7 @@ export default {
       this.charts.eco_ratio.series = [
         {
           name: 'Ecochange Ratio',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.eco_ratio]
           }),
           type: 'line',
@@ -376,7 +383,7 @@ export default {
       this.charts.net_change.series = [
         {
           name: 'Net Streamflow Change',
-          data: this.values.map(d => {
+          data: values.map(d => {
             return [d.exceedance_probs, d.net_change]
           }),
           type: 'line',

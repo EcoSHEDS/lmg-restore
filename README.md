@@ -83,4 +83,4 @@ aws s3 sync data/ s3://<DATA_BUCKET_NAME>/ --delete
 
 ## License
 
-MIT (see `LICENSE`)
+see `LICENSE` file
