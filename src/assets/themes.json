@@ -17,6 +17,10 @@
             "url": "https://doi.org/10.5066/P91DOYCJ"
           },
           {
+            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
+            "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
+          },
+          {
             "text": "Rodgers, K.D., Hoos, A.B., Roland, V.L., and Knight, R.R., 2018, Trend analysis results for sites used in RESTORE Streamflow alteration assessments: U.S. Geological Survey data release.",
             "url": "https://doi.org/10.5066/P9YSE754"
           }
@@ -46,6 +50,18 @@
           }
         ],
         "title": "Gages > Streamflow Statistics"
+      },
+      {
+        "id": "gage-lff",
+        "name": "Low Flow Frequency Statistics",
+        "description": "Low flow frequency statistics for streamflow gages",
+        "citations": [
+          {
+            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
+            "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
+          }
+        ],
+        "title": "Gages > Low Flow Frequency Statistics"
       },
       {
         "id": "gage-qtrend",
@@ -128,6 +144,18 @@
           }
         ],
         "title": "HUC12 Basins > Streamflow Quantiles"
+      },
+      {
+        "id": "huc12-lff",
+        "name": "Low Flow Frequency Statistics",
+        "description": "Low flow frequency statistics for HUC12 pour points",
+        "citations": [
+          {
+            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
+            "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
+          }
+        ],
+        "title": "HUC12 Basins > Low Flow Frequency Statistics"
       },
       {
         "id": "huc12-solar",

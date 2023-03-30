@@ -21,7 +21,7 @@ gage_themes <- themes %>%
   )
 
 gage_themes$citations[[1]] <- gage_themes %>% 
-  filter(id %in% c("gage-cov", "gage-qstat", "gage-qtrend")) %>% 
+  filter(id %in% c("gage-cov", "gage-qstat", "gage-lff", "gage-qtrend")) %>% 
   pull(citations) %>% 
   map(~ .[[1]])
 
