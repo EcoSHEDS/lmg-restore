@@ -78,7 +78,7 @@ export default new Vuex.Store({
       return axios.get(`/${theme.id}/theme.json`)
         .then((response) => {
           const theme = response.data
-          const variable = theme.variables[0]
+          const variable = theme.variables.find(d => d.default) || theme.variables[0]
 
           return { theme, variable }
         })

@@ -497,7 +497,7 @@
           <h2 v-if="theme.citations.length > 1">Citations </h2>
           <h2 v-else>Citation </h2>
           <p v-for="citation in theme.citations" :key="citation.text">
-            {{citation.text}} <a :href="citation.url" target="_blank">{{ citation.url }}</a>.
+            {{citation.text}} <a :href="citation.url" target="_blank">{{ citation.url }}</a>
           </p>
 
           <v-divider class="my-8"></v-divider>
@@ -586,7 +586,7 @@
                   <h3 v-if="theme.citations.length > 1">Citations: </h3>
                   <h3 v-else>Citation: </h3>
                   <div v-for="citation in theme.citations" :key="citation.text" class="mt-4">
-                    {{citation.text}} <a :href="citation.url" target="_blank">{{ citation.url }}</a>.
+                    {{citation.text}} <a :href="citation.url" target="_blank">{{ citation.url }}</a>
                   </div>
                 </div>
               </div>
@@ -702,6 +702,8 @@ import Huc12Cov from '@/components/themes/Huc12Cov'
 import Huc12Qquantile from '@/components/themes/Huc12Qquantile'
 import Huc12Solar from '@/components/themes/Huc12Solar'
 import Huc12Hydroalt from '@/components/themes/Huc12Hydroalt'
+import Huc12Lff from '@/components/themes/Huc12Lff'
+import GageLff from '@/components/themes/GageLff'
 
 import { getValueById, getFilteredCount, getTotalCount } from '@/lib/crossfilter'
 import themes from '@/assets/themes'
@@ -736,7 +738,9 @@ export default {
     Huc12Cov,
     Huc12Qquantile,
     Huc12Solar,
-    Huc12Hydroalt
+    Huc12Hydroalt,
+    Huc12Lff,
+    GageLff
   },
   data: () => ({
     debug: process.env.NODE_ENV === 'development',
@@ -875,7 +879,7 @@ export default {
           .then(() => {
             return new Promise(async (resolve) => { // eslint-disable-line
               const variables = this.variables.filter(d => d.filter)
-              await loadVariable(variables[0])
+              await loadVariable(variables.find(d => d.default) || variables[0])
               for (let i = 1; i < variables.length; i++) {
                 console.log(`variable: ${variables[i].id}`)
                 await loadVariable(variables[i])

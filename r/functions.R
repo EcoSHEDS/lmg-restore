@@ -62,9 +62,12 @@ extract_meta_variables <- function(theme) {
 
 
 load_variables <- function(theme, index_names = NULL) {
-  meta <- extract_meta_variables(theme)
-  meta %>%
-    write_csv(file.path(theme$path, "meta-variables.csv"))
+  meta <- NULL
+  if (!is.na(theme$config$meta_file)) {
+    meta <- extract_meta_variables(theme)
+    meta %>%
+      write_csv(file.path(theme$path, "meta-variables.csv"))
+  }
   
   df <- readxl::read_xlsx("xlsx/themes.xlsx", sheet = "variables") %>% 
     filter(theme == !!theme$id) %>% 
@@ -113,7 +116,8 @@ transform_variables <- function(df, categories) {
           map = df$format_map[i],
           filter = df$format_filter[i]
         ),
-        scale = scale
+        scale = scale,
+        default = df$map_default[i]
       )
     })
   }
