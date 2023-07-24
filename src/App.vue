@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- USGS header -->
-    <header id="navbar" class="header-nav" role="banner" v-if="usgs">
+    <header id="navbar" class="header-nav" role="banner">
       <div class="tmp-container">
         <div class="header-search">
           <a class="logo-header" href="https://www.usgs.gov/" title="USGS Home">
@@ -11,7 +11,7 @@
       </div>
     </header>
 
-    <v-app-bar dense app dark absolute :style="{'margin-top': usgs ? '68px' : '0'}" v-if="$vuetify.breakpoint.mdAndUp">
+    <v-app-bar dense app dark absolute style="margin-top:68px" v-if="$vuetify.breakpoint.mdAndUp">
       <v-toolbar-title class="headline">
         USGS <span v-if="$vuetify.breakpoint.xl">Lower Mississippi-Gulf Water Science Center</span><span v-else>LMGWSC</span> |
         <span class="font-weight-light">RESTORE Data Visualization Tool</span>
@@ -33,7 +33,7 @@
         <v-icon small left>mdi-play</v-icon> go
       </v-btn> -->
     </v-app-bar>
-    <v-app-bar app dense clipped-left dark absolute :style="{'margin-top': usgs ? '68px' : '0'}" v-else>
+    <v-app-bar app dense clipped-left dark absolute style="margin-top:68px"  v-else>
       <v-toolbar-title class="subheading">
         <span>LMGWSC RESTORE Data Visualization Tool</span>
       </v-toolbar-title>
@@ -64,9 +64,9 @@
                 <v-tab ripple>
                   Dataset
                 </v-tab>
-                <!-- <v-tab ripple :disabled="!theme">
-                  Map Variable
-                </v-tab> -->
+                <v-tab ripple :disabled="!theme">
+                  Layers
+                </v-tab>
                 <v-tab ripple :disabled="!theme">
                   Crossfilters
                 </v-tab>
@@ -75,6 +75,8 @@
                   <v-icon small v-if="!collapse.tabs">mdi-menu-up</v-icon>
                   <v-icon small v-else>mdi-menu-down</v-icon>
                 </v-btn>
+
+                <!-- DATASET -->
                 <v-tab-item transition="false" reverse-transition="false">
                   <v-card class="ice-card elevation-10 pb-0" ref="dataset" v-if="!collapse.tabs">
                     <v-card-text v-if="theme" class="px-3">
@@ -148,11 +150,49 @@
                     </v-card-actions>
                   </v-card>
                 </v-tab-item>
-                <!-- <v-tab-item transition="false" reverse-transition="false">
-                  <v-card v-show="!collapse.tabs" v-if="theme">
 
+                <!-- LAYERS -->
+                <v-tab-item transition="false" reverse-transition="false">
+                  <v-card v-show="!collapse.tabs" v-if="theme">
+                    <v-card-text class="pb-2">
+                      <v-autocomplete
+                        :items="overlays"
+                        v-model="overlay"
+                        dense
+                        return-object
+                        item-value="id"
+                        item-text="label"
+                        outlined
+                        class="mb-4 mt-2"
+                        hide-details
+                        deletable-chips
+                        clearable
+                        label="Select spatial layer..."
+                      ></v-autocomplete>
+
+                      <v-divider v-if="overlayFeature" class="my-4"></v-divider>
+                      <div v-if="overlayFeature" class="d-flex">
+                        <div class="black--text body-1">
+                          Selected: <strong>{{ overlayFeature.properties.label }}</strong>
+                        </div>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon small @click="setOverlayFeature(null)" class="align-self-center mr-1">
+                          <v-icon small>mdi-close</v-icon>
+                        </v-btn>
+                      </div>
+                      <v-alert type="warning" outlined v-else-if="overlay" class="font-weight-bold">
+                        Click on a polygon to filter the points within it.
+                      </v-alert>
+                      <v-alert type="warning" outlined v-else class="font-weight-bold">
+                        Select a layer to filter the map spatially.
+                      </v-alert>
+                    </v-card-text>
                   </v-card>
-                </v-tab-item> -->
+                </v-tab-item>
+
+                <!-- CROSSFILTERS -->
                 <v-tab-item transition="false" reverse-transition="false">
                   <v-card v-show="!collapse.tabs" v-if="theme">
                     <v-card-text class="pb-2">
@@ -640,7 +680,7 @@
     </v-dialog>
 
     <!-- USGS footer -->
-    <footer class="footer" v-if="usgs">
+    <footer class="footer">
       <div class="tmp-container">
         <div class="footer-doi">
           <ul class="menu nav">
@@ -676,7 +716,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import IceMap from '@/components/IceMap'
 import IceMapLayer from '@/components/IceMapLayer'
@@ -744,7 +784,6 @@ export default {
   },
   data: () => ({
     debug: process.env.NODE_ENV === 'development',
-    usgs: process.env.VUE_APP_USGS === 'true',
     // debug: false,
     collapse: {
       dataset: false,
@@ -828,13 +867,21 @@ export default {
     legendSettings: false
   }),
   computed: {
-    ...mapGetters(['theme', 'variables', 'layer', 'colorScheme', 'colorInvert']),
+    ...mapGetters(['theme', 'variables', 'layer', 'colorScheme', 'colorInvert', 'overlays', 'overlayFeature']),
     variable: {
       get () {
         return this.$store.getters.variable
       },
       set (value) {
         return this.$store.dispatch('setVariable', value)
+      }
+    },
+    overlay: {
+      get () {
+        return this.$store.getters.overlay
+      },
+      set (value) {
+        return this.$store.dispatch('setOverlay', value)
       }
     },
     mapVariables () {
@@ -854,9 +901,13 @@ export default {
   watch: {
     variable () {
       this.variable && evt.$emit('map:render')
+    },
+    overlay (val, old) {
+      this.setOverlayFeature(null)
     }
   },
   methods: {
+    ...mapActions(['setOverlayFeature']),
     async goDebug () {
       const themes = [
         ...this.themes.options[0].children,

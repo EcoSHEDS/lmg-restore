@@ -3,9 +3,11 @@ import { mapGetters } from 'vuex'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 import * as L from 'leaflet'
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 
 import evt from '@/lib/events'
 import variableMixin from '@/mixins/variable'
+import { getCrossfilter } from '@/lib/crossfilter'
 
 export default {
   name: 'IceMapLayer',
@@ -44,12 +46,13 @@ export default {
     return {
       data: null,
       container: null,
+      dim: null,
       tip: d3Tip()
         .attr('class', 'd3-tip')
     }
   },
   computed: {
-    ...mapGetters(['variable', 'themeType']),
+    ...mapGetters(['variable', 'themeType', 'overlayFeature']),
     path () {
       const map = this.map
       function projectPoint (x, y) {
@@ -74,10 +77,16 @@ export default {
   },
   mounted () {
     // console.log(`map-layer(${this.name}):mounted`)
+    this.dim = getCrossfilter().dimension(d => d.id)
+    window.dim = this.dim
     evt.$on('map:zoom', this.render)
     evt.$on('map:render', this.renderFill)
 
-    this.container = this.$parent.svg.select('g').append('g').attr('class', 'ice-map-layer')
+    this.$parent.svg.style('pointer-events', 'none')
+    this.container = this.$parent.svg
+      .select('g')
+      .append('g')
+      .attr('class', 'ice-map-layer')
     this.container.call(this.tip)
 
     if (this.layer) {
@@ -89,6 +98,7 @@ export default {
   },
   beforeDestroy () {
     // console.log(`map-layer(${this.name}):beforeDestroy`)
+    if (this.dim) this.dim.dispose()
     evt.$off('map:zoom', this.render)
     evt.$off('map:render', this.renderFill)
     this.tip.destroy()
@@ -109,9 +119,28 @@ export default {
     selected () {
       // console.log(`map-layer(${this.name}):watch selected`)
       this.renderSelected()
+    },
+    overlayFeature () {
+      this.filterOverlayFeature()
     }
   },
   methods: {
+    filterOverlayFeature () {
+      if (this.overlayFeature && this.data) {
+        const polygons = this.overlayFeature.geometry
+        const filteredFeatures = this.data.features.filter(d => {
+          return booleanPointInPolygon(d.geometry.coordinates, polygons)
+        })
+        const filterFeatureIds = filteredFeatures.map(d => d.id)
+        this.dim.filterFunction(d => filterFeatureIds.includes(d))
+      } else {
+        console.log('no overlay feature')
+        this.dim.filterAll()
+      }
+      evt.$emit('xf:filter')
+      evt.$emit('map:render')
+      evt.$emit('filter:render')
+    },
     setTipHtml () {
       if (this.themeType === 'gage') {
         this.tip.html(d => `

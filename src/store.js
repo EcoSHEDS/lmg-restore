@@ -20,7 +20,46 @@ export default new Vuex.Store({
         type: 'continuous',
         invert: false
       }
-    }
+    },
+    overlays: [
+      {
+        id: 'states',
+        label: 'State Boundaries',
+        url: 'gis/states.geojson'
+      },
+      {
+        id: 'huc4',
+        label: 'HUC4 Basins',
+        url: 'gis/huc4.geojson'
+      },
+      {
+        id: 'huc8',
+        label: 'HUC8 Basins',
+        url: 'gis/huc8.geojson'
+      },
+      {
+        id: 'alabama_shu',
+        label: 'Alabama Strategic Habitat Units',
+        url: 'gis/alabama_shu.geojson'
+      },
+      {
+        id: 'ecoflows',
+        label: 'Ecoflows Study Area',
+        url: 'gis/ecoflows.geojson'
+      },
+      {
+        id: 'mobile_tombigbee',
+        label: 'Mobile-Tombigbee Study Area',
+        url: 'gis/mobile_tombigbee.geojson'
+      },
+      {
+        id: 'pearl_pascagoula',
+        label: 'Pearl-Pascagoula Study Area',
+        url: 'gis/pearl_pascagoula.geojson'
+      }
+    ],
+    overlay: null,
+    overlayFeature: null
   },
   getters: {
     theme: state => state.theme,
@@ -38,7 +77,10 @@ export default new Vuex.Store({
     layer: state => (state.theme ? state.theme.layer : null),
     colorScheme: state => state.settings.color.scheme,
     colorType: state => state.settings.color.type,
-    colorInvert: state => state.settings.color.invert
+    colorInvert: state => state.settings.color.invert,
+    overlays: state => state.overlays,
+    overlay: state => state.overlay,
+    overlayFeature: state => state.overlayFeature
   },
   mutations: {
     SET_THEME (state, theme) {
@@ -58,6 +100,12 @@ export default new Vuex.Store({
     },
     SET_COLOR_INVERT (state, invert) {
       state.settings.color.invert = invert
+    },
+    SET_OVERLAY (state, overlay) {
+      state.overlay = overlay
+    },
+    SET_OVERLAY_FEATURE (state, overlayFeature) {
+      state.overlayFeature = overlayFeature
     }
   },
   actions: {
@@ -165,6 +213,12 @@ export default new Vuex.Store({
     },
     setColorInvert ({ commit }, invert) {
       return commit('SET_COLOR_INVERT', invert)
+    },
+    setOverlay ({ commit }, overlay) {
+      return commit('SET_OVERLAY', overlay)
+    },
+    setOverlayFeature ({ commit }, overlayFeature) {
+      return commit('SET_OVERLAY_FEATURE', overlayFeature)
     }
   }
 })

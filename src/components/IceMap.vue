@@ -12,13 +12,24 @@
         :attribution="tile.attribution"
         layer-type="base">
       </l-tile-layer>
+      <l-geo-json
+        v-if="overlay"
+        ref="overlay"
+        :name="overlay.id"
+        :geojson="overlayFeatures"
+        :options="overlayOptions"
+        :options-style="overlayStyle"
+      >
+        <l-tooltip></l-tooltip>
+      </l-geo-json>
     </l-map>
     <slot v-if="ready"></slot>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LControlZoom, LControlLayers } from 'vue2-leaflet'
+import { LMap, LTileLayer, LGeoJson, LControlZoom, LControlLayers } from 'vue2-leaflet'
+import { mapActions, mapGetters } from 'vuex'
 import * as L from 'leaflet'
 import * as d3 from 'd3'
 
@@ -51,16 +62,60 @@ export default {
   components: {
     LMap,
     LTileLayer,
+    LGeoJson,
     LControlZoom,
     LControlLayers
   },
-  data: () => ({
-    ready: false,
-    map: null,
-    disableClick: false,
-    bounds: null,
-    zoomLevel: null
-  }),
+  data () {
+    return {
+      ready: false,
+      map: null,
+      disableClick: false,
+      bounds: null,
+      zoomLevel: null,
+      dim: null,
+      overlayFeatures: [],
+      overlayOptions: {
+        interactive: true,
+        onEachFeature: (feature, layer) => {
+          layer.bindTooltip(`<h3>${feature.properties.label}</h3>`)
+          // layer.bringToFront()
+          layer.on('mouseover', () => {
+            layer.setStyle({
+              fillColor: '#0000ff',
+              fillOpacity: 0.2
+            })
+          })
+          layer.on('mouseout', () => {
+            layer.setStyle({
+              fillColor: '#ff0000',
+              fillOpacity: 0
+            })
+          })
+          layer.on('click', (evt) => {
+            const feature = evt.target.feature
+            if (feature === this.overlayFeature) {
+              this.setOverlayFeature(null)
+            } else {
+              this.setOverlayFeature(feature)
+              layer.bringToFront()
+            }
+          })
+        }
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['overlay', 'overlayFeature'])
+  },
+  watch: {
+    overlay () {
+      this.loadOverlay()
+    },
+    overlayFeature () {
+      this.restyleOverlayFeatures()
+    }
+  },
   mounted () {
     // console.log('map:mounted')
     this.map = this.$refs.map.mapObject
@@ -95,6 +150,42 @@ export default {
       .style('z-index', 201)
 
     this.ready = true
+    this.loadOverlay()
+  },
+  methods: {
+    ...mapActions(['setOverlayFeature']),
+    async loadOverlay () {
+      this.overlayFeatures = []
+      if (!this.overlay) return
+      const { url } = this.overlay
+      const response = await fetch(url)
+      const geojson = await response.json()
+      this.overlayFeatures = geojson.features
+    },
+    overlayStyle () {
+      return {
+        fillOpacity: 0,
+        weight: 2,
+        color: 'white'
+      }
+    },
+    restyleOverlayFeatures () {
+      if (!this.$refs.overlay) return
+      const map = this.$refs.overlay.mapObject
+      const layers = map.getLayers()
+      layers.forEach(layer => {
+        const feature = layer.feature
+        if (feature === this.overlayFeature) {
+          layer.setStyle({
+            color: 'orangered'
+          })
+        } else {
+          layer.setStyle({
+            color: 'white'
+          })
+        }
+      })
+    }
   }
 }
 </script>

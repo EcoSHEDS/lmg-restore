@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all --parallel data serve",
-    "data": "http-server -p 8000 --cors -- ./data",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:staging": "vue-cli-service build --mode staging",
@@ -12,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",
+    "@turf/boolean-point-in-polygon": "^6.5.0",
     "axios": "^1.2.0",
     "core-js": "^3.8.3",
     "crossfilter2": "^1.4.7",

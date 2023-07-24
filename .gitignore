@@ -21,14 +21,15 @@ yarn-error.log*
 *.sw?
 
 # data folder
-data/**/*
-!data/.gitkeep
+public/data
+public/gis
 
 # r folder
 r/.Rproj.user
 r/.Rhistory
 .Rproj.user
 r/rds/*.rds
+r/data/
 
 # excel
 ~*.xlsx
