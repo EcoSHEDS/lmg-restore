@@ -17,19 +17,14 @@ If you are interested in adapting ICE to other datasets, please see the ICE star
 
 The R and bash scripts located in the `r` folder are used to generate the datasets for this application, which get saved to the `data/` folder.
 
-Due to their large size, the generated datasets are **not** stored in this repo. To get the latest version of the datasets, download the following tarball and extract it to the `data/` folder.
-
-```
-wget https://ecosheds.org/data/ice-lmg/ice-lmg-data.tar.gz
-tar -xzvf ice-lmg-data.tar.gz -C ./data
-```
+Due to their large size, the generated datasets are **not** stored in this repo.
 
 ## Project setup
 
 Install dependencies
 
 ```sh
-yarn install
+npm install
 ```
 
 Configuration is set using `.env` files for each environment (`development`, `staging`, `production`). See [vue-cli](https://cli.vuejs.org/guide/mode-and-env.html) for details.
@@ -38,7 +33,7 @@ There are two required configuration variables:
 
 ```
 BASE_URL=/ # root path for the application
-VUE_APP_API_URL=http://localhost:8000/  # location for fetching data, set to baseURL for axios
+VUE_APP_API_URL=data/  # location for fetching data, set to baseURL for axios
 ```
 
 The default `.env` files can be overriden with `.local` variants (e.g. `.env.development.local`).
@@ -48,7 +43,7 @@ The default `.env` files can be overriden with `.local` variants (e.g. `.env.dev
 To run the application in development mode, run the `dev` command, which serves the `data/` folder at port `8000`, and runs the vue CLI `serve` command.
 
 ```sh
-yarn dev
+npm dev
 ```
 
 ## Production Build
@@ -56,13 +51,13 @@ yarn dev
 Run the `build` command to build the application for production. The output is saved to the `dist/` folder.
 
 ```sh
-yarn build
+npm build
 ```
 
 For staging build, run `build:staging`
 
 ```sh
-yarn build:staging
+npm build:staging
 ```
 
 ### Deployment

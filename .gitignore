@@ -21,8 +21,7 @@ yarn-error.log*
 *.sw?
 
 # data folder
-public/data
-public/gis
+data
 
 # r folder
 r/.Rproj.user
