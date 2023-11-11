@@ -13,7 +13,7 @@
   "dependencies": {
     "@mdi/font": "^4.5.95",
     "@turf/boolean-point-in-polygon": "^6.5.0",
-    "axios": "^1.2.0",
+    "axios": "^1.6.0",
     "core-js": "^3.8.3",
     "crossfilter2": "^1.4.7",
     "d3": "^5.12.0",
