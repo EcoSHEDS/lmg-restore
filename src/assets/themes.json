@@ -64,6 +64,18 @@
         "title": "Gages > Streamflow Trend Analyses"
       },
       {
+        "id": "gage-ecoflows",
+        "name": "Mississippi Ecoflows",
+        "description": "To better understand the needs of riverine ecosystems and help natural resource managers make science-based regulatory decisions, flow-ecology relationships were modeled in Mississippi. The flow-ecology relationships were modeled for East, West, and Southeast bioregions using a parallel analysis on two datasets: one in which the hydrologic metrics were calculated from synthetic streamflow at 1,182 macroinvertebrate collection sites and the other in which the hydrologic metrics were calculated from observed streamflow at USGS streamgages paired with 77 macroinvertebrate collection sites. The subset of hydrologic metrics that best correlate to dissimilarities in macroinvertebrate multimetric Mississippi-Benthic Index of Stream Quality (M-BISQ) scores were used as predictor variables in quantile regression models.",
+        "citations": [
+          {
+            "text": "Crowley-Ornelas, E.R., and Banks, S.M., 2023, Relating multimetric indices to hydrologic metrics to estimate flow-ecology relationship for macroinvertebrates in Mississippi, USA: U.S. Geological Survey data release",
+            "url": "https://doi.org/10.5066/P9DBLFZ2"
+          }
+        ],
+        "title": "Gages > Mississippi Ecoflows"
+      },
+      {
         "id": "gage-solar",
         "name": "Solar Radiation",
         "description": "Monthly and annual average total solar radiation for 956 USGS streamflow gages located on tributaries and streams flowing to the Gulf of Mexico. For each gage, average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each gage.",

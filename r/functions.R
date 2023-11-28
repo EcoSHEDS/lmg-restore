@@ -1,7 +1,7 @@
 load_theme <- function(id) {
   theme <- list(
     id = id,
-    path = file.path("../public/data/", id),
+    path = file.path("../data/", id),
     config = readxl::read_xlsx("xlsx/themes.xlsx", sheet = "themes") %>% 
       filter(id == !!id) %>% 
       mutate(

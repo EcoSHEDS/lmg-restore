@@ -88,6 +88,9 @@
                       <exceedance-dimension v-if="theme.dimensions.exceedance" class="mt-4"></exceedance-dimension>
                       <decade-dimension v-if="theme.dimensions.decade" class="mt-4"></decade-dimension>
                       <signif-dimension v-if="theme.dimensions.signif"></signif-dimension>
+                      <ecoflows-region v-if="theme.id.startsWith('gage-ecoflows')"></ecoflows-region>
+                      <ecoflows-flowtype v-if="theme.id.startsWith('gage-ecoflows')"></ecoflows-flowtype>
+                      <!-- <pre>{{ theme.id }}</pre> -->
                       <div class="subheading mt-4" v-if="theme && theme.id === 'gage-primary' || theme.id === 'gage-qtrend'">
                         <v-icon small>mdi-information</v-icon> For trend test results, the decade slider sets the
                         starting point of the analysis period, which always ends in 2015 (e.g., if 1970s is selected, then trend results
@@ -240,7 +243,7 @@
         stateless
         width="500"
         class="mt-0">
-        <component v-if="theme" :is="theme.id" :selected="feature.selected" @close="selectFeature()"></component>
+        <component v-if="theme" :is="themeComponentId" :selected="feature.selected" @close="selectFeature()"></component>
       </v-navigation-drawer>
     </v-content>
 
@@ -729,6 +732,9 @@ import DecadeDimension from '@/components/dimensions/DecadeDimension'
 import SignifDimension from '@/components/dimensions/SignifDimension'
 import ExceedanceDimension from '@/components/dimensions/ExceedanceDimension'
 
+import EcoflowsRegion from '@/components/EcoflowsRegion'
+import EcoflowsFlowtype from '@/components/EcoflowsFlowtype'
+
 import TrendVariable from '@/components/TrendVariable'
 import UserGuide from '@/components/UserGuide'
 
@@ -736,6 +742,7 @@ import GagePrimary from '@/components/themes/GagePrimary'
 import GageCov from '@/components/themes/GageCov'
 import GageQstat from '@/components/themes/GageQstat'
 import GageQtrend from '@/components/themes/GageQtrend'
+import GageEcoflows from '@/components/themes/GageEcoflows'
 import GageSolar from '@/components/themes/GageSolar'
 import Huc12Primary from '@/components/themes/Huc12Primary'
 import Huc12Cov from '@/components/themes/Huc12Cov'
@@ -767,12 +774,16 @@ export default {
     SignifDimension,
     ExceedanceDimension,
 
+    EcoflowsRegion,
+    EcoflowsFlowtype,
+
     TrendVariable,
     UserGuide,
     GagePrimary,
     GageCov,
     GageQstat,
     GageQtrend,
+    GageEcoflows,
     GageSolar,
     Huc12Primary,
     Huc12Cov,
@@ -867,7 +878,12 @@ export default {
     legendSettings: false
   }),
   computed: {
-    ...mapGetters(['theme', 'variables', 'layer', 'colorScheme', 'colorInvert', 'overlays', 'overlayFeature']),
+    ...mapGetters(['theme', 'ecoflowsTheme', 'variables', 'layer', 'colorScheme', 'colorInvert', 'overlays', 'overlayFeature']),
+    themeComponentId () {
+      if (!this.theme) return null
+      if (this.theme.id.startsWith('gage-ecoflows')) return 'gage-ecoflows'
+      return this.theme.id
+    },
     variable: {
       get () {
         return this.$store.getters.variable
@@ -904,6 +920,11 @@ export default {
     },
     overlay (val, old) {
       this.setOverlayFeature(null)
+    },
+    ecoflowsTheme (val, old) {
+      if (val) {
+        this.selectEcoflowsTheme({ id: 'gage-ecoflows' })
+      }
     }
   },
   methods: {
@@ -962,6 +983,25 @@ export default {
           evt.$emit('theme:set')
           this.loading.theme = false
           this.dialogs.theme = false
+        })
+    },
+    selectEcoflowsTheme (theme) {
+      this.error.theme = null
+
+      this.selectFeature()
+      this.clearFilters()
+
+      return this.$store.dispatch('loadTheme', theme)
+        .then(() => {
+          this.error.theme = null
+          this.updateCounts()
+        })
+        .catch((err) => {
+          console.error(err)
+          this.error.theme = 'Failed to load theme'
+        })
+        .finally(() => {
+          evt.$emit('theme:set')
         })
     },
     clearTheme () {

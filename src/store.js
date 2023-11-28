@@ -14,6 +14,8 @@ export default new Vuex.Store({
     theme: null,
     decade: null,
     variable: null,
+    ecoflowsRegion: 'east',
+    ecoflowsFlowtype: 'obs',
     settings: {
       color: {
         scheme: 'Viridis',
@@ -68,6 +70,9 @@ export default new Vuex.Store({
       return state.theme.id.split('-')[0]
     },
     decade: state => state.decade,
+    ecoflowsRegion: state => state.ecoflowsRegion,
+    ecoflowsFlowtype: state => state.ecoflowsFlowtype,
+    ecoflowsTheme: state => `gage-ecoflows-${state.ecoflowsFlowtype}-${state.ecoflowsRegion}`,
     decadeIndex: state => DECADES.indexOf(state.decade),
     variables: state => (state.theme ? state.theme.variables : []),
     variable: state => state.variable,
@@ -88,6 +93,12 @@ export default new Vuex.Store({
     },
     SET_DECADE (state, decade) {
       state.decade = decade
+    },
+    SET_ECOFLOWS_REGION (state, region) {
+      state.ecoflowsRegion = region
+    },
+    SET_ECOFLOWS_FLOWTYPE (state, flowtype) {
+      state.ecoflowsFlowtype = flowtype
     },
     SET_VARIABLE (state, variable) {
       state.variable = variable
@@ -112,6 +123,13 @@ export default new Vuex.Store({
     setDecade ({ commit }, decade) {
       commit('SET_DECADE', decade)
     },
+    setEcoflowsRegion ({ commit }, region) {
+      commit('SET_ECOFLOWS_REGION', region)
+    },
+    setEcoflowsFlowtype ({ commit }, flowtype) {
+      console.log('setEcoflowsFlowtype', flowtype)
+      commit('SET_ECOFLOWS_FLOWTYPE', flowtype)
+    },
     clearTheme ({ commit }) {
       commit('SET_THEME', null)
       commit('SET_VARIABLE', null)
@@ -119,11 +137,17 @@ export default new Vuex.Store({
       return Promise.resolve(null)
     },
     loadTheme ({ commit, dispatch }, theme) {
+      console.log('loadTheme', theme)
       if (!theme) {
         return dispatch('clearTheme')
       }
 
-      return axios.get(`/${theme.id}/theme.json`)
+      let themeId = theme.id
+      if (themeId === 'gage-ecoflows') {
+        themeId = this.getters.ecoflowsTheme
+      }
+
+      return axios.get(`/${themeId}/theme.json`)
         .then((response) => {
           const theme = response.data
           const variable = theme.variables.find(d => d.default) || theme.variables[0]

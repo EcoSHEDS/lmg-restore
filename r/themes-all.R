@@ -2,7 +2,21 @@
 
 library(tidyverse)
 
-themes <- c("gage-cov", "gage-qstat", "gage-qtrend", "gage-solar", "gage-primary", "huc12-cov", "huc12-hydroalt", "huc12-lff", "huc12-qquantile", "huc12-solar", "huc12-primary")
+themes <- c(
+  "gage-cov",
+  "gage-ecoflows", 
+  "gage-lff", 
+  "gage-primary", 
+  "gage-qstat",
+  "gage-qtrend", 
+  "gage-solar", 
+  "huc12-cov",
+  "huc12-hydroalt", 
+  "huc12-lff", 
+  "huc12-primary",
+  "huc12-qquantile", 
+  "huc12-solar"
+)
 
 for (t in themes) {
   cat(rep("-", times = 80), "\n", sep = "")

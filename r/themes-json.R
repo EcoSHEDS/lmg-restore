@@ -51,3 +51,4 @@ list(
 ) %>% 
   # toJSON(auto_unbox = TRUE, pretty = TRUE)
   write_json("../src/assets/themes.json", auto_unbox = TRUE, pretty = TRUE)
+
