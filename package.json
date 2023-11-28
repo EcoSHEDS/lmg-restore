@@ -8,7 +8,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:staging": "vue-cli-service build --mode staging",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy:stage": "npm run build:staging && aws s3 sync dist/ s3://usgs-chs-conte-dev-lmg-restore-website/apps/ecosheds/lmg-restore/",
+    "deploy": "npm run build && aws s3 sync dist/ s3://usgs-chs-conte-prod-lmg-restore-website/apps/ecosheds/lmg-restore/"
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",

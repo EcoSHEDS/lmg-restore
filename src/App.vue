@@ -297,9 +297,9 @@
             the Lower Mississippi-Gulf Region.
           </p>
           <p class="body-1">
-            This application was built by <a href="https://walkerenvres.com" target="_blank">Walker Environmental Research</a>
-            and is an adaptation of the <a href="http://ice.ecosheds.org" target="_blank">Interactive Catchment Explorer</a>,
-            which is part of the <a href="https://ecosheds.org" target="_blank">Spatial Hydro-Ecological Decision System (SHEDS)</a>.
+            This application was built by <a href="https://walkerenvres.com" target="_blank">Walker Environmental Research</a><v-icon small class="align-self-center">mdi-open-in-new</v-icon>
+            and is an adaptation of the <a href="http://ice.ecosheds.org" target="_blank">Interactive Catchment Explorer</a><v-icon small class="align-self-center">mdi-open-in-new</v-icon>,
+            which is part of the <a href="https://usgs.gov/apps/ecosheds" target="_blank">Spatial Hydro-Ecological Decision System (EcoSHEDS)</a>.
           </p>
 
           <v-divider class="mb-4"></v-divider>
@@ -379,9 +379,9 @@
             the Lower Mississippi-Gulf Region.
           </p>
           <p class="body-1">
-            This application was built by <a href="https://walkerenvres.com" target="_blank">Walker Environmental Research</a>
-            and is an adaptation of the <a href="http://ice.ecosheds.org" target="_blank">Interactive Catchment Explorer</a>,
-            which is part of the <a href="https://ecosheds.org" target="_blank">Spatial Hydro-Ecological Decision System (SHEDS)</a>.
+            This application was built by <a href="https://walkerenvres.com" target="_blank">Walker Environmental Research</a><v-icon small class="align-self-center">mdi-open-in-new</v-icon>
+            and is an adaptation of the <a href="http://ice.ecosheds.org" target="_blank">Interactive Catchment Explorer</a><v-icon small class="align-self-center">mdi-open-in-new</v-icon>
+            which is part of the <a href="https://usgs.gov/apps/ecosheds" target="_blank">Spatial Hydro-Ecological Data System (EcoSHEDS)</a>.
           </p>
 
           <v-divider class="mb-4"></v-divider>
