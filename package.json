@@ -9,8 +9,10 @@
     "build": "vue-cli-service build",
     "build:staging": "vue-cli-service build --mode staging",
     "lint": "vue-cli-service lint",
-    "deploy:stage": "npm run build:staging && aws s3 sync dist/ s3://usgs-chs-conte-dev-lmg-restore-website/apps/ecosheds/lmg-restore/",
-    "deploy": "npm run build && aws s3 sync dist/ s3://usgs-chs-conte-prod-lmg-restore-website/apps/ecosheds/lmg-restore/"
+    "deploy:stage:data": "aws s3 sync data/ s3://conte-lmg-restore-dev/apps/ecosheds/lmg-restore/data/",
+    "deploy:stage": "npm run build:staging && aws s3 sync dist/ s3://conte-lmg-restore-dev/apps/ecosheds/lmg-restore/",
+    "deploy": "npm run build && aws s3 sync dist/ s3://usgs-chs-conte-prod-lmg-restore-website/apps/ecosheds/lmg-restore/",
+    "deploy:data": "aws s3 sync data/ s3://usgs-chs-conte-prod-lmg-restore-website/apps/ecosheds/lmg-restore/data/"
   },
   "dependencies": {
     "@mdi/font": "^4.5.95",
