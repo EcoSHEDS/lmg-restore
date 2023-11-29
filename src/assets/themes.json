@@ -134,6 +134,18 @@
         "title": "HUC12 Basins > Streamflow Quantiles"
       },
       {
+        "id": "huc12-lff",
+        "name": "Low Flow Frequency Statistics",
+        "description": "Low flow frequency statistics for HUC12 pour points",
+        "citations": [
+          {
+            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
+            "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
+          }
+        ],
+        "title": "HUC12 Basins > Low Flow Frequency Statistics"
+      },
+      {
         "id": "huc12-solar",
         "name": "Solar Radiation",
         "description": "Monthly and annual average total solar radiation for 9,219 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. For each HUC12, the average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each HUC12 pour point.",

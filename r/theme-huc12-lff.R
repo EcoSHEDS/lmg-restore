@@ -11,8 +11,17 @@ source("functions.R")
 
 theme <- load_theme("huc12-lff")
 
+colnames <- read_csv(
+  file.path(config::get("data_dir"), theme$id, "colnames_master.csv"),
+  col_types = cols(.default = col_character())
+) %>% 
+  clean_names() %>% 
+  filter(include == "YES") %>% 
+  rename(name = new_name)
+
 variables <- load_variables(theme)
 # MANUAL: copy meta-variables.csv to themes.xlsx$variables
+
 # variables <- read_csv(
 #   file.path(config::get("data_dir"), theme$id, "huc12_SyntheticLFF_colnames_master_dataviz.csv"),
 #   col_types = cols(.default = col_character())
@@ -29,23 +38,47 @@ df_dataset <- read_tsv(
       .default = col_double(),
       huc12_fpp = col_character(),
       huc12_updt = col_character(),
-      class = col_character(),
-      huc_ID = col_character(),
+      huc_comid = col_character(),
+      huc_InsufficientObs_1Day = col_character(),
+      huc_InvalidLmoms_1Day = col_character(),
       huc_InsufficientObs_7Day = col_character(),
-      huc_InsufficientObs_30Day = col_character()
+      huc_InvalidLmoms_7Day = col_character(),
+      huc_InsufficientObs_30Day = col_character(),
+      huc_InvalidLmoms_30Day = col_character()
     ),
-    na = "NA"
+    na = c("NA", "-Inf")
   ) %>% 
   mutate(id = huc12_fpp) %>%
   arrange(id) %>% 
-  filter(class == "perennial")
+  select(all_of(c("id", colnames$name))) %>% 
+  na.omit()
+
 stopifnot(
   all(!is.na(df_dataset$id)),
   all(!duplicated(df_dataset$id))
 )
+colnames %>% 
+  filter(!name %in% c("fpp_long", "fpp_lat", "huc12_fpp")) %>% 
+  arrange(name) %>% 
+  write_csv("~/tmp/colnames.csv")
+
+df_dataset %>% 
+  pivot_longer(-c(id, fpp_long, fpp_lat, huc12_fpp)) %>% 
+  filter(value > -Inf) %>% 
+  group_by(name) %>% 
+  summarise(min = min(value, na.rm = TRUE), max = max(value, na.rm = TRUE)) %>% 
+  arrange(name) %>% 
+  write_csv("~/tmp/variable_ranges.csv")
+
+df_dataset %>% 
+  pivot_longer(-c(id, fpp_long, fpp_lat, huc12_fpp)) %>% 
+  filter(str_starts(name, "huc_")) %>%
+  ggplot(aes(value)) +
+  geom_histogram() +
+  facet_wrap(~name)
 
 out_dataset <- df_dataset %>% 
-  select(id, lat = huc_lat, lon = huc_long, variables$df$id)
+  select(id, lat = fpp_lat, lon = fpp_long, variables$df$id)
 
 dataset <- list(
   df = df_dataset,
@@ -55,7 +88,7 @@ dataset <- list(
 # layer -------------------------------------------------------------------
 
 layer_sf <- df_dataset %>% 
-  select(id, huc12 = huc12_fpp, dec_lat_va = huc_lat, dec_long_va = huc_long) %>% 
+  select(id, huc12 = huc12_fpp, dec_lat_va = fpp_lat, dec_long_va = fpp_long) %>% 
   st_as_sf(coords = c("dec_long_va", "dec_lat_va"), crs = 4326, remove = FALSE)
 stopifnot(all(!duplicated(layer_sf$id)))
 

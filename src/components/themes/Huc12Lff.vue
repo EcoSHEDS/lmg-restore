@@ -24,8 +24,16 @@ import highcharts from 'highcharts'
 
 import themeSelect from '@/mixins/themeSelect'
 
-const lffCategories = ['7Q2', '7Q10', '30Q5', '30Q20']
-const lffStats = ['7Day2yr', '7Day10yr', '30Day5yr', '30Day20yr']
+const variables = []
+for (const y of ['1', '7', '30']) {
+  for (const x of [2, 5, 10, 20]) {
+    variables.push({
+      label: `${y}Q${x}`,
+      stat: `huc_${y}Day${x}yr_Est_corrII`,
+      bias: `finalBias_${y}Q${x}`
+    })
+  }
+}
 
 export default {
   name: 'Huc12Lff',
@@ -38,7 +46,7 @@ export default {
             height: 300,
             width: 450,
             marginTop: 20,
-            type: 'column'
+            type: 'line'
           },
           title: {
             text: null
@@ -46,12 +54,12 @@ export default {
           tooltip: {
             valueDecimals: 2,
             valueSuffix: ' log10[cms]',
-            shared: true,
+            shared: false,
             headerFormat: '<span>Statistic: <b>{point.key}</b></span><br/>',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> Bias Correction: <b>{point.y}</b><br/>'
           },
           xAxis: {
-            categories: lffCategories,
+            categories: variables.map(v => v.label),
             title: {
               text: 'Low Flow Statistic'
             }
@@ -72,18 +80,20 @@ export default {
             height: 300,
             width: 450,
             marginTop: 20,
-            type: 'column'
+            type: 'line'
           },
           title: {
             text: null
           },
           tooltip: {
             valueDecimals: 2,
-            shared: true,
-            headerFormat: '<span>Statistic: <b>{point.key}</b></span><br/>'
+            shared: false,
+            headerFormat: '<span>Statistic: <b>{point.key}</b></span><br/>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> Estimate: <b>{point.y}</b><br/>',
+            valueSuffix: ' log10[cms]'
           },
           xAxis: {
-            categories: lffCategories,
+            categories: variables.map(v => v.label),
             title: {
               text: 'Low Flow Statistic'
             }
@@ -109,23 +119,24 @@ export default {
       const value = this.values[0]
       this.charts.bias.series = [
         {
-          data: lffCategories.map(c => value[`Corr_${c}`])
+          data: [...variables.slice(0, 4).map(c => value[c.bias]), null, null, null, null, null, null, null, null]
+        },
+        {
+          data: [null, null, null, null, ...variables.slice(4, 8).map(c => value[c.bias]), null, null, null, null]
+        },
+        {
+          data: [null, null, null, null, null, null, null, null, ...variables.slice(8, 12).map(c => value[c.bias])]
         }
       ]
       this.charts.stats.series = [
         {
-          data: lffStats.map(c => value[`huc_${c}_Est_Corr`]),
-          tooltip: {
-            pointFormat: '<span style="color:{point.color}">\u25CF</span> Estimate: <b>{point.y}</b><br/>',
-            valueSuffix: ' log10[cms]'
-          }
+          data: [...variables.slice(0, 4).map(c => value[c.stat]), null, null, null, null, null, null, null, null]
         },
         {
-          type: 'errorbar',
-          data: lffStats.map(c => [value[`huc_${c}_Lwr_Corr`], value[`huc_${c}_Upr_Corr`]]),
-          tooltip: {
-            pointFormat: '&nbsp;&nbsp;&nbsp;95% CI: <b>{point.low} to {point.high} log10[cms]</b><br/>'
-          }
+          data: [null, null, null, null, ...variables.slice(4, 8).map(c => value[c.stat]), null, null, null, null]
+        },
+        {
+          data: [null, null, null, null, null, null, null, null, ...variables.slice(8, 12).map(c => value[c.stat])]
         }
       ]
     }
