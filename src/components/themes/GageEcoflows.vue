@@ -30,15 +30,6 @@
           </v-list-item>
         </v-list>
       </ice-feature-box>
-
-      <!-- <ice-feature-box>
-        <template v-slot:title>Low Flow Statistics</template>
-        <highcharts class="chart" :options="charts.stats"></highcharts>
-      </ice-feature-box>
-      <ice-feature-box>
-        <template v-slot:title>Spatial Bias Correction of Paired HUC12</template>
-        <highcharts class="chart" :options="charts.bias"></highcharts>
-      </ice-feature-box> -->
     </div>
   </ice-feature-container>
 </template>

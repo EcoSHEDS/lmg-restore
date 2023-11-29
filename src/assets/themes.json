@@ -17,10 +17,6 @@
             "url": "https://doi.org/10.5066/P91DOYCJ"
           },
           {
-            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
-            "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
-          },
-          {
             "text": "Rodgers, K.D., Hoos, A.B., Roland, V.L., and Knight, R.R., 2018, Trend analysis results for sites used in RESTORE Streamflow alteration assessments: U.S. Geological Survey data release.",
             "url": "https://doi.org/10.5066/P9YSE754"
           }
@@ -122,6 +118,18 @@
         "title": "HUC12 Basins > Basin Characteristics"
       },
       {
+        "id": "huc12-hydroalt",
+        "name": "Hydrologic Alteration",
+        "description": "Modeled daily streamflow data for 9,201 12-digit hydrologic unit code (HUC12) pour points draining to the Gulf of Mexico were used to calculate hydrologic alteration using three methods. The first method is streamflow trend analysis using the Quantile-Kendall methodology developed by Robert M. Hirsch. The second method is calculating hydro change which is a modified method of calculating ecosurplus and ecodeficit. For this project ecosurplus and ecodeficit have been combined to assess overall hydrologic regime change. The third method is the confidence interval hypothesis test developed by Charles N. Kroll. The first two methods are a means of quantifying hydrologic alteration while the third is a hypothesis test to simply determine if statistically significant alteration has occurred. All three methods are employed to determine which is the best at determining alteration of the hydrologic regime in the Gulf Coast Ecosystem Restoration Council (RESTORE) study area. Statistical analysis was done in RStudio. The HUC12 pour points are the geographic data used to view the results spatially.",
+        "citations": [
+          {
+            "text": "Crowley-Ornelas, E.R., and Roland, V.L., 2021, Assessment of hydrologic alteration at 12-digit hydrologic unit code (HUC12) pour points in the southeastern United States, 1950 - 2009: U.S. Geological Survey data release.",
+            "url": "https://doi.org/10.5066/P93TLFWJ"
+          }
+        ],
+        "title": "HUC12 Basins > Hydrologic Alteration"
+      },
+      {
         "id": "huc12-qquantile",
         "name": "Streamflow Quantiles",
         "description": "Estimated streamflow quantiles for 9,203 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. The estimated quantiles range from 0.03% to 99.97% and were estimated using a multi-output neural network that was trained using streamflow data at sites with records containing only non-zero streamflow values. Quantiles were estimated at decadal intervals from the 1950s (1950-1959) to the 2000s (2000-2009). See the dataset citation for more information about the methodology used to generate this dataset.",
@@ -136,10 +144,10 @@
       {
         "id": "huc12-lff",
         "name": "Low Flow Frequency Statistics",
-        "description": "Low flow frequency statistics for HUC12 pour points",
+        "description": "For a demonstration of a workflow to assess the feasibility of streamflow frequency analyses from simulated streamflow, these datasets of low-streamflow (flow) frequency (LFF) statistics and associated bias correction values were generated from the simulated streamflow by Robinson and others (2020). Each LFF statistic and associated bias correction is represented with the NQT notation that represents the low flow (discharge/streamflow), Q, for N-day duration and T-year return period. Three, N-day averaging periods (1, 7, and 30-day) and four return periods (2, 5, 10, and 20-year; 0.05, 0.10, 0.20, and 0.50 nonexceedance probabilities) were computed as a part of the demonstration for a total of 12 LFF statistics (the 1Q2, 1Q5, 1Q10, 1Q20, 7Q2, 7Q5, 7Q10, 7Q20, 30Q2, 30Q5, 30Q10, and 30Q20) to explore the effect of the N-day averaging period and depth into the tail on the modeled bias.",
         "citations": [
           {
-            "text": "Whaling, A. R. and others (2023) [IN REVIEW]",
+            "text": "Whaling, A.R., Sanks K.M., and Asquith, W.H., 2021, RESTORE/syntheticdv2lff—Scripts demonstrating the application of a workflow to determine the feasibility of using simulated streamflow for estimation of streamflow frequency statistics: U.S. Geological Survey software release",
             "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
           }
         ],

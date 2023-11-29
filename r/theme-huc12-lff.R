@@ -10,6 +10,10 @@ source("functions.R")
 # load variables ----------------------------------------------------------
 
 theme <- load_theme("huc12-lff")
+theme$config$citations[[2]] <- list(
+  text = "Whaling, A.R., Sanks, K.M., Asquith, W.H., Rodgers, Kirk D., 2023, Application of a workflow to determine the feasibility of using simulated streamflow for estimation of streamflow frequency statistics: Submitted to Journal of Hydrologic Engineering [in review].",
+  url = ""
+)
 
 colnames <- read_csv(
   file.path(config::get("data_dir"), theme$id, "colnames_master.csv"),

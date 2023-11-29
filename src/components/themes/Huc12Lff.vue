@@ -12,7 +12,7 @@
         <highcharts class="chart" :options="charts.stats"></highcharts>
       </ice-feature-box>
       <ice-feature-box>
-        <template v-slot:title>Spatial Bias Correction</template>
+        <template v-slot:title>Bias Correction</template>
         <highcharts class="chart" :options="charts.bias"></highcharts>
       </ice-feature-box>
     </div>
