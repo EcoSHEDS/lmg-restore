@@ -15,6 +15,7 @@
       <v-toolbar-title class="headline">
         USGS <span v-if="$vuetify.breakpoint.xl">Lower Mississippi-Gulf Water Science Center</span><span v-else>LMGWSC</span> |
         <span class="font-weight-light">RESTORE Data Visualization Tool</span>
+        <span style="font-size:50%;" class="pl-1">v{{ version }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text medium class="mx-2" @click="dialogs.welcome = true">
@@ -795,6 +796,7 @@ export default {
   },
   data: () => ({
     debug: process.env.NODE_ENV === 'development',
+    version: process.env.VUE_APP_VERSION,
     // debug: false,
     collapse: {
       dataset: false,
@@ -908,6 +910,7 @@ export default {
     }
   },
   mounted () {
+    console.log(process.env.PACKAGE_VERSION)
     // if (!this.theme) this.dialogs.welcome = true
     evt.$on('xf:filter', this.updateCounts)
   },
