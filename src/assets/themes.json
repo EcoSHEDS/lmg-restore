@@ -26,7 +26,7 @@
       {
         "id": "gage-cov",
         "name": "Basin Characteristics",
-        "description": "Physical and climatic basin characteristics for 957 USGS streamflow gages located on tributaries and streams flowing to the Gulf of Mexico. The variables represent mutable and immutable basin characteristics and are organized by characteristic type: physical (5), hydrologic (6), categorical (12), climate (6), landscape alteration (7), and land cover (12).  Mutable characteristics such as climate, land cover, and landscape alteration variables are reported in decadal increments (1950s, 1960s, ..., 2000s).",
+        "description": "Physical and climatic basin characteristics for 957 USGS streamflow gages located on tributaries and streams flowing to the Gulf of America. The variables represent mutable and immutable basin characteristics and are organized by characteristic type: physical (5), hydrologic (6), categorical (12), climate (6), landscape alteration (7), and land cover (12).  Mutable characteristics such as climate, land cover, and landscape alteration variables are reported in decadal increments (1950s, 1960s, ..., 2000s).",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., Worland, S.C., Wieczorek, M.E., Asquith, W.H., Knight, R.R., 2019, Summary of basin characteristics for National Hydrography Dataset, version 2 catchments in the Southeastern United States, 1950 - 2010: U.S. Geological Survey data release.",
@@ -38,7 +38,7 @@
       {
         "id": "gage-qstat",
         "name": "Streamflow Statistics",
-        "description": "Summary statistics of observed daily-mean streamflow for 956 USGS streamflow gages located on tributaries and streams flowing to the Gulf of Mexico. The statistics include flow-duration curve quantiles, L-moments, the minimum, maximum, median flow for days not equal to zero, and the number of zero-flow days. Results were calculated at decadal increments from the 1950s (1950-1959) to the 2000s (2000-2009).",
+        "description": "Summary statistics of observed daily-mean streamflow for 956 USGS streamflow gages located on tributaries and streams flowing to the Gulf of America. The statistics include flow-duration curve quantiles, L-moments, the minimum, maximum, median flow for days not equal to zero, and the number of zero-flow days. Results were calculated at decadal increments from the 1950s (1950-1959) to the 2000s (2000-2009).",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., Asquith, W.H., Worland, S.C., and Knight, R.R., 2019, Summary of streamflow statistics for USGS streamgages in the southeastern United States, 1950–2010: U.S. Geological Survey data release.",
@@ -50,7 +50,7 @@
       {
         "id": "gage-qtrend",
         "name": "Streamflow Trend Analyses",
-        "description": "Trend analyses of daily streamflow records for 139 USGS streamflow gages located on tributaries and streams flowing to the Gulf of Mexico. The trends were assessed using the Mann-Kendall trend test as well as a new method known as a \"Quantile-Kendall\" plot. Each test was performed on various seasonal, monthly, and decile stratifications of the dataset. Data were analyzed based on water year using the Mann-Kendall trend test and by climate year using the Quantile-Kendall methodology to: (1) identify regions which are statistically similar for estimating streamflow characteristics; (2) identify trends related to changing streamflow and streamflow alteration over time; and (3) to identify possible correlations with estuary health in the Gulf of Mexico.",
+        "description": "Trend analyses of daily streamflow records for 139 USGS streamflow gages located on tributaries and streams flowing to the Gulf of America. The trends were assessed using the Mann-Kendall trend test as well as a new method known as a \"Quantile-Kendall\" plot. Each test was performed on various seasonal, monthly, and decile stratifications of the dataset. Data were analyzed based on water year using the Mann-Kendall trend test and by climate year using the Quantile-Kendall methodology to: (1) identify regions which are statistically similar for estimating streamflow characteristics; (2) identify trends related to changing streamflow and streamflow alteration over time; and (3) to identify possible correlations with estuary health in the Gulf of America.",
         "citations": [
           {
             "text": "Rodgers, K.D., Hoos, A.B., Roland, V.L., and Knight, R.R., 2018, Trend analysis results for sites used in RESTORE Streamflow alteration assessments: U.S. Geological Survey data release.",
@@ -74,7 +74,7 @@
       {
         "id": "gage-solar",
         "name": "Solar Radiation",
-        "description": "Monthly and annual average total solar radiation for 956 USGS streamflow gages located on tributaries and streams flowing to the Gulf of Mexico. For each gage, average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each gage.",
+        "description": "Monthly and annual average total solar radiation for 956 USGS streamflow gages located on tributaries and streams flowing to the Gulf of America. For each gage, average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each gage.",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., Asquith, W.H., Knight, R.R., and Worland, S.C., 2019, Solar radiation for National Hydrography Dataset, version 2 catchments in the southeastern United States, 1950 - 2010 at USGS streamflow-gaging stations:U.S. Geological Survey data release.",
@@ -108,7 +108,7 @@
       {
         "id": "huc12-cov",
         "name": "Basin Characteristics",
-        "description": "Physical and climatic basin characteristics for 9,314 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. The variables represent mutable and immutable basin characteristics and are organized by characteristic type: physical (5), hydrologic (6), categorical (12), climate (6), landscape alteration (7), and land cover (12).  Mutable characteristics such as climate, land cover, and landscape alteration variables are reported in decadal increments (1950s, 1960s, ..., 2000s).",
+        "description": "Physical and climatic basin characteristics for 9,314 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of America. The variables represent mutable and immutable basin characteristics and are organized by characteristic type: physical (5), hydrologic (6), categorical (12), climate (6), landscape alteration (7), and land cover (12).  Mutable characteristics such as climate, land cover, and landscape alteration variables are reported in decadal increments (1950s, 1960s, ..., 2000s).",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., Worland, S.C., Wieczorek, M.E., Asquith, W.H., Knight, R.R., 2019, Summary of basin characteristics for National Hydrography Dataset, version 2 catchments in the Southeastern United States, 1950 - 2010: U.S. Geological Survey data release.",
@@ -120,7 +120,7 @@
       {
         "id": "huc12-hydroalt",
         "name": "Hydrologic Alteration",
-        "description": "Modeled daily streamflow data for 9,201 12-digit hydrologic unit code (HUC12) pour points draining to the Gulf of Mexico were used to calculate hydrologic alteration using three methods. The first method is streamflow trend analysis using the Quantile-Kendall methodology developed by Robert M. Hirsch. The second method is calculating hydro change which is a modified method of calculating ecosurplus and ecodeficit. For this project ecosurplus and ecodeficit have been combined to assess overall hydrologic regime change. The third method is the confidence interval hypothesis test developed by Charles N. Kroll. The first two methods are a means of quantifying hydrologic alteration while the third is a hypothesis test to simply determine if statistically significant alteration has occurred. All three methods are employed to determine which is the best at determining alteration of the hydrologic regime in the Gulf Coast Ecosystem Restoration Council (RESTORE) study area. Statistical analysis was done in RStudio. The HUC12 pour points are the geographic data used to view the results spatially.",
+        "description": "Modeled daily streamflow data for 9,201 12-digit hydrologic unit code (HUC12) pour points draining to the Gulf of America were used to calculate hydrologic alteration using three methods. The first method is streamflow trend analysis using the Quantile-Kendall methodology developed by Robert M. Hirsch. The second method is calculating hydro change which is a modified method of calculating ecosurplus and ecodeficit. For this project ecosurplus and ecodeficit have been combined to assess overall hydrologic regime change. The third method is the confidence interval hypothesis test developed by Charles N. Kroll. The first two methods are a means of quantifying hydrologic alteration while the third is a hypothesis test to simply determine if statistically significant alteration has occurred. All three methods are employed to determine which is the best at determining alteration of the hydrologic regime in the Gulf Coast Ecosystem Restoration Council (RESTORE) study area. Statistical analysis was done in RStudio. The HUC12 pour points are the geographic data used to view the results spatially.",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., and Roland, V.L., 2021, Assessment of hydrologic alteration at 12-digit hydrologic unit code (HUC12) pour points in the southeastern United States, 1950 - 2009: U.S. Geological Survey data release.",
@@ -132,7 +132,7 @@
       {
         "id": "huc12-qquantile",
         "name": "Streamflow Quantiles",
-        "description": "Estimated streamflow quantiles for 9,203 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. The estimated quantiles range from 0.03% to 99.97% and were estimated using a multi-output neural network that was trained using streamflow data at sites with records containing only non-zero streamflow values. Quantiles were estimated at decadal intervals from the 1950s (1950-1959) to the 2000s (2000-2009). See the dataset citation for more information about the methodology used to generate this dataset.",
+        "description": "Estimated streamflow quantiles for 9,203 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of America. The estimated quantiles range from 0.03% to 99.97% and were estimated using a multi-output neural network that was trained using streamflow data at sites with records containing only non-zero streamflow values. Quantiles were estimated at decadal intervals from the 1950s (1950-1959) to the 2000s (2000-2009). See the dataset citation for more information about the methodology used to generate this dataset.",
         "citations": [
           {
             "text": "Worland, S.C., Knight, R.R., and Asquith, W.H., 2019, Estimated quantiles for the pour points of 9,203 level-12 hydrologic unit codes in the southeastern United States, 1950--2009: U.S. Geological Survey data release.",
@@ -151,8 +151,8 @@
             "url": "https://code.usgs.gov/water/restore/syntheticdv2lff"
           },
           {
-            "text": "Whaling, A.R., Sanks, K.M., Asquith, W.H., Rodgers, Kirk D., 2023, Application of a workflow to determine the feasibility of using simulated streamflow for estimation of streamflow frequency statistics: Submitted to Journal of Hydrologic Engineering [in review].",
-            "url": ""
+            "text": "Whaling, A.R., Sanks, K.M., Asquith, W.H., Rodgers, K.D., 2024, Application of a workflow to determine the feasibility of using simulated streamflow for estimation of streamflow frequency statistics. Journal of Hydrologic Engineering, 29(5).",
+            "url": "https://doi.org/10.1061/JHYEFF.HEENG-5935"
           }
         ],
         "title": "HUC12 Basins > Low Flow Frequency Statistics"
@@ -160,7 +160,7 @@
       {
         "id": "huc12-solar",
         "name": "Solar Radiation",
-        "description": "Monthly and annual average total solar radiation for 9,219 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of Mexico. For each HUC12, the average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each HUC12 pour point.",
+        "description": "Monthly and annual average total solar radiation for 9,219 level-12 Hydrologic Unit Code (HUC12) basins that drain to the Gulf of America. For each HUC12, the average solar radiation was extracted from a contiguous gridded surface created by the National Renewable Energy Laboratory. The radiation rates represent direct normal irradiance as the amount of solar radiation received per unit area at the location of each HUC12 pour point.",
         "citations": [
           {
             "text": "Crowley-Ornelas, E.R., Asquith, W.H., Knight, R.R., and Worland, S.C., 2019, Solar radiation for National Hydrography Dataset, version 2 catchments in the southeastern United States, 1950 - 2010 at 12-digit hydrologic unit code (HUC12) pour points: U.S. Geological Survey data release.",

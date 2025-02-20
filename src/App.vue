@@ -423,19 +423,19 @@
 
         <v-card-text class="mt-8 black--text">
           <p class="body-1">Questions, comments, problems? Please contact one of the team members listed below.</p>
-          <h4>USGS Contact</h4>
+          <h4>Project Manager</h4>
           <p class="ml-4">
-            Kirk D. Rodgers, PhD<br>
-            Hydrologist, and Eastern Region Diversity Subcouncil Chairman<br>
-            <a href="https://www.usgs.gov/centers/lmg-water" target="_blank">U.S. Geological Survey Lower Mississippi-Gulf Water Science Center</a><br>
-            E-mail: <a href="mailto:krodgers@usgs.gov">krodgers@usgs.gov</a>
+            Rachel L. Dubose, PhD<br>
+            Assistant Center Director<br>
+            <a href="https://www.usgs.gov/centers/lower-mississippi-gulf-water-science-center" target="_blank">U.S. Geological Survey Lower Mississippi-Gulf Water Science Center</a><br>
+            E-mail: <a href="mailto:rdubose@usgs.gov">rdubose@usgs.gov</a>
           </p>
           <h4>Application Developer and Administrator</h4>
           <p class="ml-4">
             Jeffrey D. Walker, PhD<br>
-            Environmental Data Scientist<br>
-            <a href="https://walkerenvres.com" target="_blank">Walker Environmental Research, LLC</a><br>
-            E-mail: <a href="mailto:jeff@walkerenvres.com">jeff@walkerenvres.com</a>
+            Web Developer and Data Scientist<br>
+            USGS Contractor<br>
+            E-mail: <a href="mailto:jdwalker@contractor.usgs.gov">jdwalker@contractor.usgs.gov</a>
           </p>
         </v-card-text>
 

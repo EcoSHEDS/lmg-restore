@@ -30,7 +30,7 @@
               </p>
               <p>
                 Using the interactive map and crossfilters, users can explore these datasets and identify patterns and trends related to streamflow
-                conditions among the basins draining to the Gulf of Mexico.
+                conditions among the basins draining to the Gulf of America.
               </p>
               <p>
                 This guide is divided into the following sections:
@@ -120,7 +120,7 @@
               </ol>
               <p>
                 Datasets in the first group provide data at USGS streamflow gage locations. Datasets in the second group provide data
-                for all HUC12 basins draining to the Gulf of Mexico (including both gaged and ungaged basins).
+                for all HUC12 basins draining to the Gulf of America (including both gaged and ungaged basins).
               </p>
               <p>
                 The <strong>Primary Dataset</strong> for each group combines key variables from each of the other datasets.
